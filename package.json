@@ -1,0 +1,36 @@
+{
+  "name": "flusight-csv-tools",
+  "version": "0.0.1",
+  "description": "JS tooling for CDC FluSight format csvs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require ts-node/register ./test/*.spec.ts",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reichlab/flusight-csv-tools.git"
+  },
+  "author": "Abhinav Tushar <lepisma@fastmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reichlab/flusight-csv-tools/issues"
+  },
+  "homepage": "https://github.com/reichlab/flusight-csv-tools#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.44",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "ts-loader": "^3.1.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1",
+    "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "@types/d3-collection": "^1.0.5",
+    "@types/papaparse": "^4.1.31",
+    "d3-collection": "^1.0.4",
+    "papaparse": "^4.3.6"
+  }
+}
