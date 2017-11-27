@@ -1,9 +1,11 @@
+import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
+
 export default class Submission {
-  readonly epiweek: number
+  readonly epiweek: Epiweek
   readonly model: string
   filePath: string
 
-  constructor(filePath: string, public epiweek: number, public model: string) {
+  constructor(filePath: string, public epiweek: Epiweek, public model: string) {
     this.filePath = filePath
     this.readCsv()
   }
@@ -12,17 +14,16 @@ export default class Submission {
     // Parse the csv
   }
 
-  getPoint(target: string, region: string): number {
+  getPoint(target: TargetId, region: RegionId): number {
   }
 
-  getBins(target: string, region: string) {
+  getBins(target: TargetId, region: RegionId): Bin[] {
   }
 
-  getConfidenceRange(target: string, region: string, ciPercent: number = 90): [number, number] {
+  getConfidenceRange(target: TargetId, region: RegionId, ciPercent: number = 90): [number, number] {
     let ciTrim = 0.5 - (ciPercent / 200)
   }
 
   toCsv(filePath: string) {
-    //
   }
 }
