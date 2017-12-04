@@ -1,2 +1,1 @@
-import { Submission } from './submission'
-
+import Submission from './submission'

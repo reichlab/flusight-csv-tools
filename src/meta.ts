@@ -12,6 +12,16 @@ export const targetMap = {
   'onset-wk': 'Season onset'
 }
 
+export const targetType = {
+  1: 'percent',
+  2: 'percent',
+  3: 'percent',
+  4: 'percent',
+  'peak': 'percent',
+  'peak-wk': 'week',
+  'onset-wk': 'week'
+}
+
 export const regionMap = {
   'nat': 'US National',
   'hhs1': 'HHS Region 1',

@@ -1,5 +1,5 @@
 import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
-import { targetMap, regionMap } from './meta'
+import { targetMap, regionMap, targetType } from './meta'
 import * as Papa from 'papaparse'
 import * as d3 from 'd3-collection'
 import * as fs from 'fs'
@@ -36,9 +36,25 @@ export default class Submission {
   }
 
   getBins(target: TargetId, region: RegionId): Bin[] {
-    return this.data[regionMap[region]][targetMap[target]]
+    let bins = this.data[regionMap[region]][targetMap[target]]
       .filter(row => row[2] == 'Bin')
-      .map(row => [row[4], row[5], row[6]])
+      .map(row => [row[4], row[5], row[6]]) // bin start, bin end, value
+
+    let comparePercentage = (a, b) => a - b
+    let compareWeeks = (a, b) => {
+      if ((a >= 30) && (b < 30)) {
+        return -1
+      } else if ((a < 30) && (b >= 30)) {
+        return 1
+      } else {
+        return a - b
+      }
+    }
+
+    // TODO Handle none bin of onset properly
+    bins = bins.filter(row => row[0] !== 'none')
+
+    return bins.sort(targetType[target] === 'percent' ? comparePercentage : compareWeeks)
   }
 
   getConfidenceRange(target: TargetId, region: RegionId, ciPercent: number = 90): [number, number] {

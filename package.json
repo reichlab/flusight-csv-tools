@@ -1,8 +1,8 @@
 {
   "name": "flusight-csv-tools",
   "version": "0.0.1",
-  "description": "JS tooling for CDC FluSight format csvs.",
-  "main": "index.js",
+  "description": "Node toolkit for CDC FluSight format csvs.",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha --require ts-node/register ./test/*.spec.ts",
     "build": "webpack"
