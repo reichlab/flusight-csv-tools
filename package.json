@@ -29,8 +29,10 @@
   },
   "dependencies": {
     "@types/d3-collection": "^1.0.5",
+    "@types/node": "^8.0.54",
     "@types/papaparse": "^4.1.31",
     "d3-collection": "^1.0.4",
+    "fs-extra": "^4.0.2",
     "papaparse": "^4.3.6"
   }
 }

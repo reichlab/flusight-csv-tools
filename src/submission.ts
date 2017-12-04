@@ -1,27 +1,49 @@
 import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
+import { targetMap, regionMap } from './meta'
+import * as Papa from 'papaparse'
+import * as d3 from 'd3-collection'
+import * as fs from 'fs'
 
 export default class Submission {
   readonly epiweek: Epiweek
   readonly model: string
-  filePath: string
+  readonly filePath: string
+  headers: string[]
+  data
 
-  constructor(filePath: string, public epiweek: Epiweek, public model: string) {
+  constructor(filePath: string, epiweek: Epiweek, model: string) {
     this.filePath = filePath
+    this.epiweek = epiweek
+    this.model = model
     this.readCsv()
   }
 
   private readCsv() {
-    // Parse the csv
+    let csvData = Papa.parse(fs.readFileSync(this.filePath, 'utf8'), {
+      dynamicTyping: true
+    }).data
+
+    this.headers = csvData[0]
+    this.data = d3.nest()
+      .key(d => d[0]) // region
+      .key(d => d[1]) // target
+      .object(csvData.slice(1).filter(d => !(d.length === 1 && d[0] === '')))
   }
 
   getPoint(target: TargetId, region: RegionId): number {
+    return this.data[regionMap[region]][targetMap[target]]
+      .find(row => row[2] == 'Point')[6]
   }
 
   getBins(target: TargetId, region: RegionId): Bin[] {
+    return this.data[regionMap[region]][targetMap[target]]
+      .filter(row => row[2] == 'Bin')
+      .map(row => [row[4], row[5], row[6]])
   }
 
   getConfidenceRange(target: TargetId, region: RegionId, ciPercent: number = 90): [number, number] {
     let ciTrim = 0.5 - (ciPercent / 200)
+    return [1, 2]
   }
 
   toCsv(filePath: string) {

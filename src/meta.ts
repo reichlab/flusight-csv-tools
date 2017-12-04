@@ -2,7 +2,7 @@
 
 import { RegionId, TargetId } from './interfaces'
 
-export const targetMap: { TargetId: string } = {
+export const targetMap = {
   1: '1 wk ahead',
   2: '2 wk ahead',
   3: '3 wk ahead',
@@ -12,7 +12,7 @@ export const targetMap: { TargetId: string } = {
   'onset-wk': 'Season onset'
 }
 
-export const regionMap: { RegionId: string } = {
+export const regionMap = {
   'nat': 'US National',
   'hhs1': 'HHS Region 1',
   'hhs2': 'HHS Region 2',

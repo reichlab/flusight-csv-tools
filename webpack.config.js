@@ -4,8 +4,11 @@ module.exports = {
   entry: './src/index.ts',
   devtool: 'inline-source-map',
   externals: {
-    'd3-collection': 'd3-collection',
+    'd3': 'd3-collection',
     'papaparse': 'papaparse'
+  },
+  node: {
+    fs: 'empty'
   },
   module: {
     rules: [
