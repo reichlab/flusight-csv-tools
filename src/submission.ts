@@ -62,7 +62,41 @@ export default class Submission {
 
   getConfidenceRange(target: TargetId, region: RegionId, ciPercent: number = 90): [number, number] {
     let ciTrim = 0.5 - (ciPercent / 200)
-    return [1, 2]
+    let bins = this.getBins(target, region)
+
+    let accumulator = {
+      low: 0,
+      high: 0
+    }
+
+    let range = {
+      low: null,
+      high: null
+    }
+
+    let maxIdx = 0
+    let maxValue = bins[maxIdx][2]
+
+    for (let i = 0; i < bins.length; i++) {
+      if (bins[i][2] > maxValue) {
+        maxIdx = i
+        maxValue = bins[maxIdx][2]
+      }
+
+      // Update accumulators
+      accumulator.low += bins[i][2]
+      accumulator.high += bins[bins.length - i - 1][2]
+
+      if ((accumulator.low > ciTrim) && (!range.low)) {
+        range.low = bins[i][0]
+      }
+
+      if ((accumulator.high > ciTrim) && (!range.high)) {
+        range.high = bins[bins.length - i - 1][1]
+      }
+    }
+
+    return [range.low, range.high]
   }
 
   toCsv(filePath: string) {
