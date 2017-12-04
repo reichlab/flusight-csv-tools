@@ -52,7 +52,10 @@ export default class Submission {
     }
 
     // TODO Handle none bin of onset properly
-    bins = bins.filter(row => row[0] !== 'none')
+    if (target === 'onset-wk') {
+      process.emitWarning('Removing none bin from onset')
+      bins = bins.filter(row => row[0] !== 'none')
+    }
 
     return bins.sort(targetType[target] === 'percent' ? comparePercentage : compareWeeks)
   }
