@@ -16,7 +16,7 @@ export const regionIds = [
   'hhs10'
 ]
 
-export type targetIds = [
+export const targetIds = [
   1,
   2,
   3,
