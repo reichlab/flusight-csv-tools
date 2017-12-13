@@ -2,7 +2,31 @@
 
 import { RegionId, TargetId } from './interfaces'
 
-export const targetMap = {
+export const regionIds = [
+  'nat',
+  'hhs1',
+  'hhs2',
+  'hsh3',
+  'hhs4',
+  'hhs5',
+  'hhs6',
+  'hhs7',
+  'hhs8',
+  'hhs9',
+  'hhs10'
+]
+
+export type targetIds = [
+  1,
+  2,
+  3,
+  4,
+  'peak',
+  'peak-wk',
+  'onset-wk'
+]
+
+export const targetFullName = {
   1: '1 wk ahead',
   2: '2 wk ahead',
   3: '3 wk ahead',
@@ -22,7 +46,7 @@ export const targetType = {
   'onset-wk': 'week'
 }
 
-export const regionMap = {
+export const regionFullName = {
   'nat': 'US National',
   'hhs1': 'HHS Region 1',
   'hhs2': 'HHS Region 2',

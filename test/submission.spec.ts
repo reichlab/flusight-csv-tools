@@ -1,5 +1,4 @@
 import { Submission } from '../src/index'
-import { targetMap, regionMap } from '../src/meta'
 import { expect } from 'chai'
 import 'mocha'
 

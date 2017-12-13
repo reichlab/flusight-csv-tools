@@ -1,5 +1,5 @@
 import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
-import { targetMap, regionMap, targetType } from './meta'
+import { targetFullName, regionFullName, targetType } from './meta'
 import * as Papa from 'papaparse'
 import * as d3 from 'd3-collection'
 import * as fs from 'fs'
@@ -43,7 +43,7 @@ export default class Submission {
    * inferred value.
    */
   getPoint(target: TargetId, region: RegionId): number {
-    return this.data[regionMap[region]][targetMap[target]]
+    return this.data[regionFullName[region]][targetFullName[target]]
       .find(row => row[2] == 'Point')[6]
   }
 
@@ -51,7 +51,7 @@ export default class Submission {
    * Return an array of bin values for given target and region.
    */
   getBins(target: TargetId, region: RegionId): Bin[] {
-    let bins = this.data[regionMap[region]][targetMap[target]]
+    let bins = this.data[regionFullName[region]][targetFullName[target]]
       .filter(row => row[2] == 'Bin')
       .map(row => [row[4], row[5], row[6]]) // bin start, bin end, value
 
