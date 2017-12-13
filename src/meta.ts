@@ -2,6 +2,16 @@
 
 import { RegionId, TargetId } from './interfaces'
 
+export const headers = [
+  'location',
+  'target',
+  'type',
+  'unit',
+  'bin_start_incl',
+  'bin_end_notincl',
+  'value'
+]
+
 export const regionIds: RegionId[] = [
   'nat',
   'hhs1',
