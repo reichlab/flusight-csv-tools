@@ -92,16 +92,7 @@ export default class Submission {
       high: null
     }
 
-    let maxIdx = 0
-    let maxValue = bins[maxIdx][2]
-
     for (let i = 0; i < bins.length; i++) {
-      if (bins[i][2] > maxValue) {
-        maxIdx = i
-        maxValue = bins[maxIdx][2]
-      }
-
-      // Update accumulators
       accumulator.low += bins[i][2]
       accumulator.high += bins[bins.length - i - 1][2]
 
