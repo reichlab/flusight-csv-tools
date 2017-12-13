@@ -2,7 +2,7 @@
 
 import { RegionId, TargetId } from './interfaces'
 
-export const regionIds = [
+export const regionIds: RegionId[] = [
   'nat',
   'hhs1',
   'hhs2',
@@ -16,7 +16,7 @@ export const regionIds = [
   'hhs10'
 ]
 
-export const targetIds = [
+export const targetIds: TargetId[] = [
   1,
   2,
   3,
