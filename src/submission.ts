@@ -82,36 +82,26 @@ export default class Submission {
     let ciTrim = 0.5 - (ciPercent / 200)
     let bins = this.getBins(target, region)
 
-    let accumulator = {
+    let pAccum = {
       low: 0,
       high: 0
     }
 
-    let range = {
-      low: null,
-      high: null
-    }
+    let low, high
 
     for (let i = 0; i < bins.length; i++) {
-      accumulator.low += bins[i][2]
-      accumulator.high += bins[bins.length - i - 1][2]
+      pAccum.low += bins[i][2]
+      pAccum.high += bins[bins.length - i - 1][2]
 
-      if ((accumulator.low > ciTrim) && (!range.low)) {
-        range.low = bins[i][0]
+      if ((pAccum.low > ciTrim) && (!low)) {
+        low = bins[i][0]
       }
 
-      if ((accumulator.high > ciTrim) && (!range.high)) {
-        range.high = bins[bins.length - i - 1][1]
+      if ((pAccum.high > ciTrim) && (!high)) {
+        high = bins[bins.length - i - 1][1]
       }
     }
 
-    return [range.low, range.high]
-  }
-
-  /**
-   * Write the data to a csv file. This write the csv after sorting the rows
-   * using a default order.
-   */
-  toCsv(filePath: string) {
+    return [low, high]
   }
 }
