@@ -11,6 +11,9 @@ export default class Submission {
   headers: string[]
   data
 
+  /**
+   * Initialize a submission object
+   */
   constructor(filePath: string, epiweek: Epiweek, model: string) {
     this.filePath = filePath
     this.epiweek = epiweek
@@ -18,6 +21,9 @@ export default class Submission {
     this.readCsv()
   }
 
+  /**
+   * Parse and read the csv
+   */
   private readCsv() {
     let csvData = Papa.parse(fs.readFileSync(this.filePath, 'utf8'), {
       dynamicTyping: true
@@ -30,11 +36,20 @@ export default class Submission {
       .object(csvData.slice(1).filter(d => !(d.length === 1 && d[0] === '')))
   }
 
+  /**
+   * Return a point value for given target and region. The value is taken
+   * directly from the csv without trying to infer it from bins. The verification
+   * module takes care of checking where the provided point value matches with the
+   * inferred value.
+   */
   getPoint(target: TargetId, region: RegionId): number {
     return this.data[regionMap[region]][targetMap[target]]
       .find(row => row[2] == 'Point')[6]
   }
 
+  /**
+   * Return an array of bin values for given target and region.
+   */
   getBins(target: TargetId, region: RegionId): Bin[] {
     let bins = this.data[regionMap[region]][targetMap[target]]
       .filter(row => row[2] == 'Bin')
@@ -60,6 +75,9 @@ export default class Submission {
     return bins.sort(targetType[target] === 'percent' ? comparePercentage : compareWeeks)
   }
 
+  /**
+   * Return low and high bin values for the given confidence (in percent) and target, region pair.
+   */
   getConfidenceRange(target: TargetId, region: RegionId, ciPercent: number = 90): [number, number] {
     let ciTrim = 0.5 - (ciPercent / 200)
     let bins = this.getBins(target, region)
@@ -99,6 +117,10 @@ export default class Submission {
     return [range.low, range.high]
   }
 
+  /**
+   * Write the data to a csv file. This write the csv after sorting the rows
+   * using a default order.
+   */
   toCsv(filePath: string) {
   }
 }
