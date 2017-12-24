@@ -9,5 +9,8 @@ export type RegionId = 'nat' | 'hhs1' | 'hhs2' | 'hsh3' | 'hhs4' | 'hhs5' | 'hhs
 // Target id
 export type TargetId = 1 | 2 | 3 | 4 | 'peak' | 'peak-wk' | 'onset-wk'
 
+// Season id with first year yyyy
+export type SeasonId = number
+
 // Epiweek in the format yyyyww
 export type Epiweek = number

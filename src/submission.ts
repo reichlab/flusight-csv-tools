@@ -2,7 +2,7 @@ import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
 import { targetFullName, regionFullName, targetType } from './meta'
 import * as Papa from 'papaparse'
 import * as d3 from 'd3-collection'
-import * as fs from 'fs'
+import * as fs from 'fs-extra'
 
 export default class Submission {
   readonly epiweek: Epiweek
