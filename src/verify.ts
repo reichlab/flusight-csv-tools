@@ -49,3 +49,19 @@ export function verifyPoint(sub: Submission) {
 export function verifyHeaders(sub: Submission) {
   assert(arrayEqual(sub.headers.map(h => h.toLowerCase()), headers))
 }
+
+/**
+ * Verify that the probabilities in submission sum to one
+ * @param sub
+ */
+export function verifyProbabilities(sub: Submission) {
+  targetIds.forEach(target => {
+    regionIds.forEach(region => {
+      let probabilities = sub.getBins(target, region).map(b => b[2])
+      assert(
+        almostEqual(probabilities.reduce((x, y) => x + y), 1.0),
+        `Probabilities for target ${target}, region ${region} should sum to 1.0`
+      )
+    })
+  })
+}
