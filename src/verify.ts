@@ -2,7 +2,7 @@ import Submission from './submission'
 import { targetIds, regionIds, headers } from './meta'
 import { TargetId, RegionId, Bin } from './interfaces'
 import * as assert from 'assert'
-import { almostEqual } from 'almost-equal'
+import * as almostEqual from 'almost-equal'
 import * as arrayEqual from 'array-equal'
 
 /**
