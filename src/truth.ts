@@ -28,10 +28,16 @@ function currentSeasonId(): SeasonId {
  * Read csv using papaparse
  * @param fileName
  */
-function readCsv(fileName: string) {
-  return Papa.parse(fs.readFileSync(fileName, 'utf8').trim(), {
+async function readCsv(fileName: string) {
+  return Papa.parse((await fs.readFile(fileName, 'utf8')).trim(), {
     dynamicTyping: true
   }).data
+}
+
+async function downloadBaseline(outputFile) {
+  await download(baselineUrl).then(data => {
+    fs.writeFileSync(outputFile, data);
+  })
 }
 
 /**
@@ -39,18 +45,18 @@ function readCsv(fileName: string) {
  * return the data
  * @param fileName
  */
-function getBaselineData(fileName: string) {
-  if (fs.pathExistsSync(fileName)) {
-    let seasons = readCsv(fileName)[0].map(d => parseInt(d.split('/')[0]))
+async function getBaselineData(fileName: string) {
+  if (await fs.pathExists(fileName)) {
+    let seasons = (await readCsv(fileName))[0].map(d => parseInt(d.split('/')[0]))
     if (seasons.indexOf(currentSeasonId()) === -1) {
       console.log('Baseline file not valid, downloading...')
-      download(baselineUrl).pipe(fs.createWriteStream(fileName))
+      await downloadBaseline(fileName)
     }
   } else {
     console.log('Baseline file not found, downloading...')
-    download(baselineUrl).pipe(fs.createWriteStream(fileName))
+    await downloadBaseline(fileName)
   }
-  return readCsv(fileName)
+  return await readCsv(fileName)
 }
 
 /**
@@ -58,12 +64,11 @@ function getBaselineData(fileName: string) {
  * @param region
  * @param season
  */
-function getBaselineRaw(region: RegionId, season: SeasonId): number {
-  fs.ensureDirSync(cacheDir)
-  let data = getBaselineData(path.join(cacheDir, 'wILI_Baseline.csv'))
+async function getBaselineRaw(region: RegionId, season: SeasonId) {
+  await fs.ensureDir(cacheDir)
+  let data = await getBaselineData(path.join(cacheDir, 'wILI_Baseline.csv'))
   let regionCsvName = regionFullName[region].split(' ').slice(1).join('')
   let seasonCsvName = `${season}/${season + 1}`
-
   let colIdx = data[0].indexOf(seasonCsvName)
   return data.find(row => row[0] === regionCsvName)[colIdx]
 }
