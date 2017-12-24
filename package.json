@@ -3,9 +3,11 @@
   "version": "0.0.2",
   "description": "Node toolkit for CDC FluSight format csvs.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha --require ts-node/register ./test/*.spec.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -40,5 +42,8 @@
     "mmwr-week": "^1.1.0",
     "moment": "^2.20.1",
     "papaparse": "^4.3.6"
+  },
+  "engines": {
+    "node": ">= 7.0.0"
   }
 }
