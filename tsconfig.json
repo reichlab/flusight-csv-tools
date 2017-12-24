@@ -2,10 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "allowJs": true
-  }
+    "outDir": "./dist"
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

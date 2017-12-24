@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha --require ts-node/register ./test/*.spec.ts",
-    "build": "webpack"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,8 @@
     "@types/mocha": "^2.2.44",
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
-    "ts-loader": "^3.1.1",
     "ts-node": "^3.3.0",
-    "typescript": "^2.6.1",
-    "webpack": "^3.8.1"
+    "typescript": "^2.6.1"
   },
   "dependencies": {
     "@types/d3-collection": "^1.0.5",
