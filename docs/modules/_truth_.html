@@ -924,11 +924,14 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 			<a href="_truth_.html#downloadbaseline" class="tsd-kind-icon">download<wbr>Baseline</a>
 		</li>
-		<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
 			<a href="_truth_.html#getbaselinedata" class="tsd-kind-icon">get<wbr>Baseline<wbr>Data</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-			<a href="_truth_.html#getbaselineraw" class="tsd-kind-icon">get<wbr>Baseline<wbr>Raw</a>
+			<a href="_truth_.html#getbaselineunopt" class="tsd-kind-icon">get<wbr>Baseline<wbr>Unopt</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_truth_.html#getseasondatalatestlag" class="tsd-kind-icon">get<wbr>Season<wbr>Data<wbr>Latest<wbr>Lag</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 			<a href="_truth_.html#readcsv" class="tsd-kind-icon">read<wbr>Csv</a>
@@ -949,13 +952,14 @@ img { max-width: 100%; }
 							<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_truth_.html#getbaseline" class="tsd-kind-icon">get<wbr>Baseline</a></li>
 						</ul>
 					</section>
-					<section class="tsd-index-section tsd-is-not-exported">
+					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_truth_.html#currentseasonid" class="tsd-kind-icon">current<wbr>Season<wbr>Id</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_truth_.html#downloadbaseline" class="tsd-kind-icon">download<wbr>Baseline</a></li>
-							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_truth_.html#getbaselinedata" class="tsd-kind-icon">get<wbr>Baseline<wbr>Data</a></li>
-							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_truth_.html#getbaselineraw" class="tsd-kind-icon">get<wbr>Baseline<wbr>Raw</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_truth_.html#getbaselinedata" class="tsd-kind-icon">get<wbr>Baseline<wbr>Data</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_truth_.html#getbaselineunopt" class="tsd-kind-icon">get<wbr>Baseline<wbr>Unopt</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_truth_.html#getseasondatalatestlag" class="tsd-kind-icon">get<wbr>Season<wbr>Data<wbr>Latest<wbr>Lag</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_truth_.html#readcsv" class="tsd-kind-icon">read<wbr>Csv</a></li>
 						</ul>
 					</section>
@@ -970,7 +974,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">BASELINE_<wbr>URL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv&quot;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L15">truth.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L16">truth.ts:16</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -980,27 +984,27 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">CACHE_<wbr>DIR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;path.join(userCacheDir(), &#x27;flusight-csv-tools&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L16">truth.ts:16</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L17">truth.ts:17</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 				<a name="getbaseline" class="tsd-anchor"></a>
 				<h3>get<wbr>Baseline</h3>
-				<div class="tsd-signature tsd-kind-icon">get<wbr>Baseline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;memoize(getBaselineRaw)</span></div>
+				<div class="tsd-signature tsd-kind-icon">get<wbr>Baseline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;memoize(getBaselineUnopt)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L79">truth.ts:79</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L79">truth.ts:79</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Memoized version of getBaselineRaw</p>
+						<p>Memoized version of getBaselineUnopt</p>
 					</div>
 				</div>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 				<a name="currentseasonid" class="tsd-anchor"></a>
@@ -1012,7 +1016,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L21">truth.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L22">truth.ts:22</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1028,36 +1032,41 @@ img { max-width: 100%; }
 				<a name="downloadbaseline" class="tsd-anchor"></a>
 				<h3>download<wbr>Baseline</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">download<wbr>Baseline<span class="tsd-signature-symbol">(</span>outputFile<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">download<wbr>Baseline<span class="tsd-signature-symbol">(</span>outputFile<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L37">truth.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L40">truth.ts:40</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Download baseline csv file to given path and return a promise for the path</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>outputFile: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 				<a name="getbaselinedata" class="tsd-anchor"></a>
 				<h3>get<wbr>Baseline<wbr>Data</h3>
-				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
 					<li class="tsd-signature tsd-kind-icon">get<wbr>Baseline<wbr>Data<span class="tsd-signature-symbol">(</span>fileName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L48">truth.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L50">truth.ts:50</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1070,8 +1079,6 @@ img { max-width: 100%; }
 						<ul class="tsd-parameters">
 							<li>
 								<h5>fileName: <span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1079,16 +1086,16 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-				<a name="getbaselineraw" class="tsd-anchor"></a>
-				<h3>get<wbr>Baseline<wbr>Raw</h3>
+				<a name="getbaselineunopt" class="tsd-anchor"></a>
+				<h3>get<wbr>Baseline<wbr>Unopt</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Baseline<wbr>Raw<span class="tsd-signature-symbol">(</span>region<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#regionid" class="tsd-signature-type">RegionId</a>, season<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Baseline<wbr>Unopt<span class="tsd-signature-symbol">(</span>region<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#regionid" class="tsd-signature-type">RegionId</a>, season<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L67">truth.ts:67</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L67">truth.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1103,11 +1110,37 @@ img { max-width: 100%; }
 							</li>
 							<li>
 								<h5>season: <a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></h5>
-								<div class="tsd-comment tsd-typography">
-								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="getseasondatalatestlag" class="tsd-anchor"></a>
+				<h3>get<wbr>Season<wbr>Data<wbr>Latest<wbr>Lag</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Season<wbr>Data<wbr>Latest<wbr>Lag<span class="tsd-signature-symbol">(</span>season<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L84">truth.ts:84</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return season data for the latest lag value</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>season: <a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1121,7 +1154,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/78c46cb/src/truth.ts#L31">truth.ts:31</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/b4ea9c3/src/truth.ts#L31">truth.ts:31</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1133,8 +1166,6 @@ img { max-width: 100%; }
 						<ul class="tsd-parameters">
 							<li>
 								<h5>fileName: <span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
