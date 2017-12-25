@@ -34,7 +34,11 @@ async function readCsv(fileName: string): Promise<Array<any>> {
   }).data
 }
 
-async function downloadBaseline(outputFile: string): Promise<void> {
+/**
+ * Download baseline csv file to given path
+ * @param outputFile
+ */
+export async function downloadBaseline(outputFile: string): Promise<void> {
   await download(BASELINE_URL).then(data => {
     fs.writeFileSync(outputFile, data);
   })
@@ -64,7 +68,7 @@ async function getBaselineData(fileName: string): Promise<Array<any>> {
  * @param region
  * @param season
  */
-async function getBaselineRaw(region: RegionId, season: SeasonId): Promise<number> {
+async function getBaselineUnopt(region: RegionId, season: SeasonId): Promise<number> {
   await fs.ensureDir(CACHE_DIR)
   let data = await getBaselineData(path.join(CACHE_DIR, 'wILI_Baseline.csv'))
   let regionCsvName = regionFullName[region].split(' ').slice(1).join('')
@@ -74,6 +78,6 @@ async function getBaselineRaw(region: RegionId, season: SeasonId): Promise<numbe
 }
 
 /**
- * Memoized version of getBaselineRaw
+ * Memoized version of getBaselineUnopt
  */
-export const getBaseline = memoize(getBaselineRaw)
+export const getBaseline = memoize(getBaselineUnopt)
