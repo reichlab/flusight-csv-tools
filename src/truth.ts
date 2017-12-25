@@ -28,13 +28,13 @@ function currentSeasonId(): SeasonId {
  * Read csv using papaparse
  * @param fileName
  */
-async function readCsv(fileName: string) {
+async function readCsv(fileName: string): Promise<Array<any>> {
   return Papa.parse((await fs.readFile(fileName, 'utf8')).trim(), {
     dynamicTyping: true
   }).data
 }
 
-async function downloadBaseline(outputFile) {
+async function downloadBaseline(outputFile: string): Promise<void> {
   await download(baselineUrl).then(data => {
     fs.writeFileSync(outputFile, data);
   })
@@ -45,7 +45,7 @@ async function downloadBaseline(outputFile) {
  * return the data
  * @param fileName
  */
-async function getBaselineData(fileName: string) {
+async function getBaselineData(fileName: string): Promise<Array<any>> {
   if (await fs.pathExists(fileName)) {
     let seasons = (await readCsv(fileName))[0].map(d => parseInt(d.split('/')[0]))
     if (seasons.indexOf(currentSeasonId()) === -1) {
@@ -64,7 +64,7 @@ async function getBaselineData(fileName: string) {
  * @param region
  * @param season
  */
-async function getBaselineRaw(region: RegionId, season: SeasonId) {
+async function getBaselineRaw(region: RegionId, season: SeasonId): Promise<number> {
   await fs.ensureDir(cacheDir)
   let data = await getBaselineData(path.join(cacheDir, 'wILI_Baseline.csv'))
   let regionCsvName = regionFullName[region].split(' ').slice(1).join('')
