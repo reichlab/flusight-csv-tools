@@ -49,7 +49,7 @@ export async function downloadBaseline(outputFile: string): Promise<string> {
  * return the data
  * @param fileName
  */
-async function getBaselineData(fileName: string): Promise<Array<any>> {
+export async function getBaselineData(fileName: string): Promise<Array<any>> {
   if (await fs.pathExists(fileName)) {
     let seasons = (await readCsv(fileName))[0].map(d => parseInt(d.split('/')[0]))
     if (seasons.indexOf(currentSeasonId()) === -1) {
