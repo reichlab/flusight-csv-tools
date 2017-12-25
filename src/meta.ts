@@ -16,7 +16,7 @@ export const regionIds: RegionId[] = [
   'nat',
   'hhs1',
   'hhs2',
-  'hsh3',
+  'hhs3',
   'hhs4',
   'hhs5',
   'hhs6',
