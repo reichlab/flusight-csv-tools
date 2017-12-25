@@ -84,3 +84,11 @@ export const getBaseline = memoize(getBaselineUnopt)
 export function getSeasonDataLatestLag(season: SeasonId): Promise<any> {
   return delphi.getSeasonData(season)
 }
+
+/**
+ * Same as getSeasonDataLatestLag but works on a list of seasons and return
+ * Promise.all value
+ */
+export function getSeasonsDataLatestLag(seasons: SeasonId[]): Promise<any[]> {
+  return Promise.all(seasons.map(s => getSeasonDataLatestLag))
+}
