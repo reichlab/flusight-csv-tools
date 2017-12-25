@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha --require ts-node/register ./test/*.spec.ts",
     "build": "tsc",
-    "doc": "typedoc --out ./docs/ ./src/ --excludePrivate --theme minimal",
+    "doc": "typedoc --out ./docs/ ./src/ --excludePrivate --theme minimal && touch ./docs/.nojekyll",
     "prepare": "npm run build"
   },
   "repository": {
