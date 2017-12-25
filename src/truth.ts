@@ -6,6 +6,7 @@ import * as Papa from 'papaparse'
 import { userCacheDir } from 'appdirs'
 import { SeasonId, RegionId } from './interfaces'
 import { regionFullName } from './meta'
+import * as delphi from './delphi'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 import * as download from 'download'
@@ -76,3 +77,10 @@ async function getBaselineUnopt(region: RegionId, season: SeasonId): Promise<num
  * Memoized version of getBaselineUnopt
  */
 export const getBaseline = memoize(getBaselineUnopt)
+
+/**
+ * Return season data for the latest lag value
+ */
+export function getSeasonDataLatestLag(season: SeasonId): Promise<any> {
+  return delphi.getSeasonData(season)
+}
