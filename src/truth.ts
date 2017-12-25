@@ -35,12 +35,12 @@ async function readCsv(fileName: string): Promise<Array<any>> {
 }
 
 /**
- * Download baseline csv file to given path
+ * Download baseline csv file to given path and return a promise for the path
  * @param outputFile
  */
-export async function downloadBaseline(outputFile: string): Promise<void> {
-  await download(BASELINE_URL).then(data => {
-    fs.writeFileSync(outputFile, data);
+export async function downloadBaseline(outputFile: string): Promise<string> {
+  return download(BASELINE_URL).then(data => {
+    fs.writeFile(outputFile, data).then(() => outputFile)
   })
 }
 
