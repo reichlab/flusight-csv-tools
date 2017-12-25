@@ -90,5 +90,5 @@ export function getSeasonDataLatestLag(season: SeasonId): Promise<any> {
  * Promise.all value
  */
 export function getSeasonsDataLatestLag(seasons: SeasonId[]): Promise<any[]> {
-  return Promise.all(seasons.map(s => getSeasonDataLatestLag))
+  return Promise.all(seasons.map(getSeasonDataLatestLag))
 }
