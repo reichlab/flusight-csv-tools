@@ -12,8 +12,8 @@ import * as download from 'download'
 import * as memoize from 'fast-memoize'
 
 // Url for fetching baseline data from
-const baselineUrl = 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'
-const cacheDir = path.join(userCacheDir(), 'flusight-csv-tools')
+const BASELINE_URL = 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'
+const CACHE_DIR = path.join(userCacheDir(), 'flusight-csv-tools')
 
 /**
  * Return id for current season
@@ -35,7 +35,7 @@ async function readCsv(fileName: string): Promise<Array<any>> {
 }
 
 async function downloadBaseline(outputFile: string): Promise<void> {
-  await download(baselineUrl).then(data => {
+  await download(BASELINE_URL).then(data => {
     fs.writeFileSync(outputFile, data);
   })
 }
@@ -65,8 +65,8 @@ async function getBaselineData(fileName: string): Promise<Array<any>> {
  * @param season
  */
 async function getBaselineRaw(region: RegionId, season: SeasonId): Promise<number> {
-  await fs.ensureDir(cacheDir)
-  let data = await getBaselineData(path.join(cacheDir, 'wILI_Baseline.csv'))
+  await fs.ensureDir(CACHE_DIR)
+  let data = await getBaselineData(path.join(CACHE_DIR, 'wILI_Baseline.csv'))
   let regionCsvName = regionFullName[region].split(' ').slice(1).join('')
   let seasonCsvName = `${season}/${season + 1}`
   let colIdx = data[0].indexOf(seasonCsvName)
