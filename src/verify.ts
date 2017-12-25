@@ -15,7 +15,7 @@ export function verifyPoint(csv: Csv) {
       let bins = csv.getBins(target, region)
       let point = csv.getPoint(target, region)
       assert(
-        almostEqual(point, inferPoint(bins)),
+        almostEqual(point, inferPoint(bins), almostEqual.FLT_EPSILON),
         `Point for target ${target}, region ${region} should be equal to inferred.`
       )
     })
@@ -38,7 +38,7 @@ export function verifyProbabilities(csv: Csv) {
     regionIds.forEach(region => {
       let probabilities = csv.getBins(target, region).map(b => b[2])
       assert(
-        almostEqual(probabilities.reduce((x, y) => x + y), 1.0),
+        almostEqual(probabilities.reduce((x, y) => x + y), 1.0, almostEqual.FLT_EPSILON),
         `Probabilities for target ${target}, region ${region} should sum to 1.0`
       )
     })

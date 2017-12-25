@@ -9,7 +9,7 @@ import { Bin } from './interfaces'
 export function isUniform(bins: Bin[]): boolean {
   // Skip the last bin which is sometimes different since that bin contains, e.g.
   // all wili values from 13 to 100
-  return bins.slice(0, bins.length - 1).every(bin => almostEqual(bin[2], bins[0][2]))
+  return bins.slice(0, bins.length - 1).every(bin => almostEqual(bin[2], bins[0][2], almostEqual.FLT_EPSILON))
 }
 
 /**

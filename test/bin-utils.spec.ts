@@ -21,7 +21,7 @@ describe('Slice reduction', () => {
   it('should sum to one', () => {
     let bins = randomBins(102, 5)
     let slicedSum = sliceSumBins(bins, 5).reduce((acc, b) => b[2] + acc, 0)
-    expect(almostEqual(slicedSum, 1)).to.be.true
+    expect(almostEqual(slicedSum, 1.0, almostEqual.FLT_EPSILON)).to.be.true
   })
 
   it('should have correct number of bins', () => {
