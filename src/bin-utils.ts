@@ -1,4 +1,4 @@
-// Utilities for working with array of bins
+// Module for working with Bins
 
 import * as almostEqual from 'almost-equal'
 import { Bin } from './interfaces'

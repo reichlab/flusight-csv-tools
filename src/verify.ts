@@ -1,3 +1,5 @@
+// Module for verifying csvs
+
 import Csv from './csv'
 import { targetIds, regionIds, headers } from './meta'
 import { TargetId, RegionId, Bin } from './interfaces'
@@ -31,7 +33,6 @@ export function verifyHeaders(csv: Csv) {
 
 /**
  * Verify that the probabilities in csv sum to one
- * @param csv
  */
 export function verifyProbabilities(csv: Csv) {
   targetIds.forEach(target => {

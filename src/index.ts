@@ -1,5 +1,3 @@
-// CODE FROM FLUSIGHT
-
 import Csv from './csv'
 import * as binUtils from './bin-utils'
 import * as interfaces from './interfaces'

@@ -26,7 +26,6 @@ function currentSeasonId(): SeasonId {
 
 /**
  * Read csv using papaparse
- * @param fileName
  */
 async function readCsv(fileName: string): Promise<Array<any>> {
   return Papa.parse((await fs.readFile(fileName, 'utf8')).trim(), {
@@ -36,7 +35,6 @@ async function readCsv(fileName: string): Promise<Array<any>> {
 
 /**
  * Download baseline csv file to given path and return a promise for the path
- * @param outputFile
  */
 async function downloadBaseline(outputFile: string): Promise<string> {
   return download(BASELINE_URL).then(data => {
@@ -47,7 +45,6 @@ async function downloadBaseline(outputFile: string): Promise<string> {
 /**
  * Ensure that an updated baseline csv is available in cache and
  * return the data
- * @param fileName
  */
 export async function getBaselineData(fileName: string): Promise<Array<any>> {
   if (await fs.pathExists(fileName)) {
@@ -65,8 +62,6 @@ export async function getBaselineData(fileName: string): Promise<Array<any>> {
 
 /**
  * Return baseline value
- * @param region
- * @param season
  */
 async function getBaselineUnopt(region: RegionId, season: SeasonId): Promise<number> {
   await fs.ensureDir(CACHE_DIR)
