@@ -1,5 +1,7 @@
 /src
 /test
+/docs
 .travis.yml
 tsconfig.json
 yarn.lock
+.ignore

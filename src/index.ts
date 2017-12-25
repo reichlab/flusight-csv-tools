@@ -1,17 +1,19 @@
 // CODE FROM FLUSIGHT
 
-import Submission from './submission'
-import * as truth from './truth'
-import * as verify from './verify'
+import Csv from './csv'
+import * as binUtils from './bin-utils'
+import * as interfaces from './interfaces'
 import * as meta from './meta'
 import * as score from './score'
-import * as interfaces from './interfaces'
+import * as truth from './truth'
+import * as verify from './verify'
 
 export {
-  Submission,
-  truth,
-  verify,
+  Csv,
+  binUtils,
+  interfaces,
   meta,
   score,
-  interfaces
+  truth,
+  verify
 }

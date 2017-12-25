@@ -12,8 +12,9 @@ _This is a work in progress as of now._
 const fct = require('flusight-csv-tools')
 ```
 
-1. Parsing CSVs (`fct.Submission` class)
+1. Parsing CSVs (`fct.Csv` class)
 2. Verifying CSVs (`fct.verify` module)
 3. Scoring targets (`fct.score` module)
 4. Fetching true values (`fct.truth` module)
-5. Other metadata related to CDC FluSight (`fct.meta` module)
+5. Tools for working with bin distributions (`fct.binUtils` module)
+6. Other metadata related to CDC FluSight (`fct.meta` module)

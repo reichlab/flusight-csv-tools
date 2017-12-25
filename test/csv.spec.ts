@@ -1,4 +1,4 @@
-import { Submission } from '../src/index'
+import { Csv } from '../src/index'
 import { expect } from 'chai'
 import 'mocha'
 
@@ -7,7 +7,7 @@ describe('Sample CSV file', () => {
   let epiweek = 201720
   let model = 'sample'
 
-  let sub = new Submission(filePath, epiweek, model)
+  let sub = new Csv(filePath, epiweek, model)
 
   it('should read points correctly', () => {
     expect(sub.getPoint(1, 'nat')).to.equal(6.2)

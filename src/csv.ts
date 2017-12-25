@@ -4,7 +4,10 @@ import * as Papa from 'papaparse'
 import * as d3 from 'd3-collection'
 import * as fs from 'fs-extra'
 
-export default class Submission {
+/**
+ * Class representing a CSV file
+ */
+export default class CSV {
   readonly epiweek: Epiweek
   readonly model: string
   readonly filePath: string
@@ -12,7 +15,7 @@ export default class Submission {
   data
 
   /**
-   * Initialize a submission object
+   * Initialize the csv with filename and some metadata
    */
   constructor(filePath: string, epiweek: Epiweek, model: string) {
     this.filePath = filePath
