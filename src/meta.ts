@@ -97,4 +97,4 @@ export const regionStates = {
   'hhs8': [5, 26, 28, 41, 44, 50].map(i => stateIds[i])
   'hhs9': [3, 4, 11, 33].map(i => stateIds[i])
   'hhs10': [0, 13, 37, 47].map(i => stateIds[i])
-  }
+}
