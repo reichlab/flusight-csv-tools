@@ -79,11 +79,11 @@ async function getBaselineUnopt(region: RegionId, season: SeasonId): Promise<num
 export const getBaseline = memoize(getBaselineUnopt)
 
 /**
- * Return season data for the latest lag value. Return value is an object keyed
- * by region ids having a list of { epiweek, wili } items as values
+ * Return season data for the given lag value (or latest). Return value is an
+ * object keyed by region ids having a list of { epiweek, wili } items as values
  */
-export async function getSeasonDataLatestLag(season: SeasonId): Promise<any> {
-  let data = await delphi.getSeasonData(season)
+export async function getSeasonData(season: SeasonId, lag?: number): Promise<any> {
+  let data = await delphi.requestSeasonData(season, lag)
   return data.epidata
     .sort((a, b) => a.epiweek - b.epiweek)
     .reduce((acc, { epiweek, region, wili }) => {
@@ -97,6 +97,8 @@ export async function getSeasonDataLatestLag(season: SeasonId): Promise<any> {
  * Same as getSeasonDataLatestLag but works on a list of seasons and return
  * Promise.all value
  */
-export function getSeasonsDataLatestLag(seasons: SeasonId[]): Promise<any[]> {
-  return Promise.all(seasons.map(getSeasonDataLatestLag))
+export function getSeasonsData(seasons: SeasonId[], lag?: number): Promise<any[]> {
+  return Promise.all(seasons.map(s => getSeasonData(s, lag)))
+}
+
 }

@@ -31,6 +31,6 @@ function getSeasonRequestUrl(season: SeasonId, lag?: number): string {
  * Collecting data for a season (with one lag value) with all regions amounts
  * to max of 520 results
  */
-export function getSeasonData(season: SeasonId, lag?: number): Promise<any> {
+export function requestSeasonData(season: SeasonId, lag?: number): Promise<any> {
   return rp({ uri: getSeasonRequestUrl(season, lag), json: true })
 }
