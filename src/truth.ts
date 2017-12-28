@@ -5,7 +5,7 @@ import * as fs from 'fs-extra'
 import * as Papa from 'papaparse'
 import { userCacheDir } from 'appdirs'
 import { SeasonId, RegionId } from './interfaces'
-import { regionFullName } from './meta'
+import { regionIds, regionFullName } from './meta'
 import * as delphi from './delphi'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
@@ -84,13 +84,18 @@ export const getBaseline = memoize(getBaselineUnopt)
  */
 export async function getSeasonData(season: SeasonId, lag?: number): Promise<any> {
   let data = await delphi.requestSeasonData(season, lag)
-  return data.epidata
-    .sort((a, b) => a.epiweek - b.epiweek)
-    .reduce((acc, { epiweek, region, wili }) => {
-    acc[region] = acc[region] || []
-    acc[region].push({ epiweek, wili })
-    return acc
-  }, {})
+  if (data.message === 'success') {
+    return data.epidata
+      .sort((a, b) => a.epiweek - b.epiweek)
+      .reduce((acc, { epiweek, region, wili }) => {
+        acc[region] = acc[region] || []
+        acc[region].push({ epiweek, wili })
+        return acc
+      }, {})
+  } else {
+    console.log(`Warning: While requesting data for ${season} and lag ${lag}, delphi api says: ${data.message}.`)
+    return null
+  }
 }
 
 /**
@@ -101,4 +106,52 @@ export function getSeasonsData(seasons: SeasonId[], lag?: number): Promise<any[]
   return Promise.all(seasons.map(s => getSeasonData(s, lag)))
 }
 
+/**
+ * Return season data for all the lag values from 0 to 52. Return value is an object keyed
+ * by region ids having a list of { epiweek, wili, { lagData: [{ lag, wili } ...] }} items
+ * as values
+ */
+export async function getSeasonDataAllLags(season: SeasonId): Promise<any> {
+  let lags = [...Array(52).keys()]
+
+  let latestData = await getSeasonData(season)
+  let lagData = await Promise.all(lags.map(l => getSeasonData(season, l)))
+
+  let output = {}
+  regionIds.forEach(rid => {
+    output[rid] = latestData[rid].map(({ epiweek, wili }) => {
+      // Collect all available lags
+      let lagValues = lagData
+        .map((ld, idx) => {
+          if (ld) {
+            let lagItem = ld[rid].find(d => d.epiweek === epiweek)
+            if (lagItem) {
+              return { epiweek: lagItem.epiweek, wili: lagItem.wili, lag: lags[idx] }
+            } else {
+              return null
+            }
+          } else {
+            return null
+          }
+        })
+        .filter(d => d)
+
+      if (lagValues) {
+        return {
+          epiweek,
+          wili,
+          lagData: lagValues
+            .sort((a, b) => b.lag - a.lag)
+            .map(({ lag, wili }) => { return { lag, wili } })
+        }
+      }
+
+      return {
+        epiweek,
+        wili,
+        lagData: lagValues
+      }
+    })
+  })
+  return output
 }
