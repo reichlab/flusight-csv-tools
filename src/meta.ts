@@ -89,12 +89,12 @@ export const regionStates = {
   'nat': stateIds,
   'hhs1': [6, 19, 21, 30, 39, 46].map(i => stateIds[i]),
   'hhs2': [31, 34].map(i => stateIds[i]),
-  'hhs3': [8, 20, 38, 45, 49].map(i => stateIds[i])
-  'hhs4': [1, 9, 10, 17, 25, 27, 40, 42].map(i => stateIds[i])
-  'hhs5': [14, 15, 22, 23, 35, 48].map(i => stateIds[i])
-  'hhs6': [2, 18, 32, 36, 43].map(i => stateIds[i])
-  'hhs7': [12, 16, 24, 29].map(i => stateIds[i])
-  'hhs8': [5, 26, 28, 41, 44, 50].map(i => stateIds[i])
-  'hhs9': [3, 4, 11, 33].map(i => stateIds[i])
+  'hhs3': [8, 20, 38, 45, 49].map(i => stateIds[i]),
+  'hhs4': [1, 9, 10, 17, 25, 27, 40, 42].map(i => stateIds[i]),
+  'hhs5': [14, 15, 22, 23, 35, 48].map(i => stateIds[i]),
+  'hhs6': [2, 18, 32, 36, 43].map(i => stateIds[i]),
+  'hhs7': [12, 16, 24, 29].map(i => stateIds[i]),
+  'hhs8': [5, 26, 28, 41, 44, 50].map(i => stateIds[i]),
+  'hhs9': [3, 4, 11, 33].map(i => stateIds[i]),
   'hhs10': [0, 13, 37, 47].map(i => stateIds[i])
 }
