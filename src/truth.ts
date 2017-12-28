@@ -93,7 +93,7 @@ export async function getSeasonData(season: SeasonId, lag?: number): Promise<any
         return acc
       }, {})
   } else {
-    console.log(`Warning: While requesting data for ${season} and lag ${lag}, delphi api says: ${data.message}.`)
+    console.log(`Warning: Delphi api says "${data.message}" for ${season}, lag ${lag}.`)
     return null
   }
 }
