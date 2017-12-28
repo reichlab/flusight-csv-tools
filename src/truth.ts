@@ -117,41 +117,20 @@ export async function getSeasonDataAllLags(season: SeasonId): Promise<any> {
   let latestData = await getSeasonData(season)
   let lagData = await Promise.all(lags.map(l => getSeasonData(season, l)))
 
-  let output = {}
   regionIds.forEach(rid => {
-    output[rid] = latestData[rid].map(({ epiweek, wili }) => {
-      // Collect all available lags
+    latestData[rid].forEach(({ epiweek, wili }, idx) => {
       let lagValues = lagData
+        .filter(d => d)
         .map((ld, idx) => {
-          if (ld) {
-            let lagItem = ld[rid].find(d => d.epiweek === epiweek)
-            if (lagItem) {
-              return { epiweek: lagItem.epiweek, wili: lagItem.wili, lag: lags[idx] }
-            } else {
-              return null
-            }
-          } else {
-            return null
-          }
+          let lagItem = ld[rid].find(d => d.epiweek === epiweek)
+          return lagItem ? { epiweek: lagItem.epiweek, wili: lagItem.wili, lag: lags[idx] } : null
         })
         .filter(d => d)
+        .sort((a, b) => b.lag - a.lag)
+        .map(({ lag, wili }) => { return { lag, wili } })
 
-      if (lagValues) {
-        return {
-          epiweek,
-          wili,
-          lagData: lagValues
-            .sort((a, b) => b.lag - a.lag)
-            .map(({ lag, wili }) => { return { lag, wili } })
-        }
-      }
-
-      return {
-        epiweek,
-        wili,
-        lagData: lagValues
-      }
+      latestData[rid][idx] = { epiweek, wili, lagData: lagValues }
     })
   })
-  return output
+  return latestData
 }
