@@ -1,4 +1,4 @@
-import { sliceSumBins } from '../src/utils/bins'
+import * as u from '../src/utils'
 import { expect } from 'chai'
 import * as almostEqual from 'almost-equal'
 import * as arrayEqual from 'array-equal'
@@ -20,18 +20,18 @@ function randomBins(length: number, gap: number): Bin[] {
 describe('Slice reduction', () => {
   it('should sum to one', () => {
     let bins = randomBins(102, 5)
-    let slicedSum = sliceSumBins(bins, 5).reduce((acc, b) => b[2] + acc, 0)
+    let slicedSum = u.bins.sliceSumBins(bins, 5).reduce((acc, b) => b[2] + acc, 0)
     expect(almostEqual(slicedSum, 1.0, almostEqual.FLT_EPSILON)).to.be.true
   })
 
   it('should have correct number of bins', () => {
     let bins = randomBins(102, 5)
-    expect(sliceSumBins(bins, 5).length).to.equal(21)
+    expect(u.bins.sliceSumBins(bins, 5).length).to.equal(21)
   })
 
   it('should have correct bin boundaries', () => {
     let bins = randomBins(12, 5)
-    let sliced = sliceSumBins(bins, 5)
+    let sliced = u.bins.sliceSumBins(bins, 5)
     expect(arrayEqual(sliced.map(b => b[0]), [0, 25, 50])).to.be.true
     expect(arrayEqual(sliced.map(b => b[1]), [25, 50, 60])).to.be.true
   })
