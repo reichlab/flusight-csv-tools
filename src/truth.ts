@@ -4,25 +4,44 @@ import * as path from 'path'
 import * as fs from 'fs-extra'
 import * as Papa from 'papaparse'
 import { userCacheDir } from 'appdirs'
-import { SeasonId, RegionId } from './interfaces'
+import { SeasonId, RegionId, Epiweek } from './interfaces'
 import { regionIds, regionFullName } from './meta'
 import * as delphi from './delphi'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 import * as download from 'download'
 import * as memoize from 'fast-memoize'
+import { ensureDir } from 'fs-extra';
 
 // Url for fetching baseline data from
 const BASELINE_URL = 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'
 const CACHE_DIR = path.join(userCacheDir(), 'flusight-csv-tools')
 
+
+/**
+ * Return current epiweek
+ */
+export function currentEpiweek(): Epiweek {
+  let mdate = new mmwr.MMWRDate()
+  mdate.fromMomentDate(moment())
+  return mdate.year * 100 + mdate.week
+}
+
 /**
  * Return id for current season
  */
-function currentSeasonId(): SeasonId {
-  let mdate = new mmwr.MMWRDate()
-  mdate.fromMomentDate(moment())
-  return mdate.week >= 30 ? mdate.year : mdate.year - 1
+export function currentSeasonId(): SeasonId {
+  let ew = currentEpiweek()
+  let year = Math.trunc(ew / 100)
+  return (ew % 100 >= 30) ? year : year - 1
+}
+
+/**
+ * Tell if the file is present in cache
+ */
+async function isInCache(fileName: string): Promise<boolean> {
+  await fs.ensureDir(CACHE_DIR)
+  return await fs.pathExists(path.join(CACHE_DIR, fileName))
 }
 
 /**
@@ -38,9 +57,9 @@ async function readCsv(fileName: string): Promise<Array<any>> {
  * Download baseline csv file to given path and return a promise for the path
  */
 async function downloadBaseline(outputFile: string): Promise<string> {
-  return download(BASELINE_URL).then(data => {
-    fs.writeFile(outputFile, data).then(() => outputFile)
-  })
+  let data = await download(BASELINE_URL)
+  await fs.writeFile(outputFile, data)
+  return outputFile
 }
 
 /**
