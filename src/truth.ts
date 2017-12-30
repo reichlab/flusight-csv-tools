@@ -7,7 +7,7 @@ import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 import * as download from 'download'
 import * as memoize from 'fast-memoize'
-import { cache } from './utils'
+import * as u from './utils'
 
 // Url for fetching baseline data from
 const BASELINE_URL = 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'
@@ -35,7 +35,7 @@ export function currentSeasonId(): SeasonId {
  */
 async function downloadBaseline(cacheFile: string): Promise<string> {
   let data = await download(BASELINE_URL)
-  await cache.writeInCache(cacheFile, data)
+  await u.cache.writeInCache(cacheFile, data)
   return cacheFile
 }
 
@@ -44,8 +44,8 @@ async function downloadBaseline(cacheFile: string): Promise<string> {
  * return the data
  */
 export async function getBaselineData(cacheFile: string): Promise<Array<any>> {
-  if (await cache.isInCache(cacheFile)) {
-    let seasons = (await cache.readFromCache(cacheFile))[0].map(d => parseInt(d.split('/')[0]))
+  if (await u.cache.isInCache(cacheFile)) {
+    let seasons = (await u.cache.readFromCache(cacheFile))[0].map(d => parseInt(d.split('/')[0]))
     if (seasons.indexOf(currentSeasonId()) === -1) {
       console.log('Baseline file not valid, downloading...')
       await downloadBaseline(cacheFile)
@@ -54,7 +54,7 @@ export async function getBaselineData(cacheFile: string): Promise<Array<any>> {
     console.log('Baseline file not found, downloading...')
     await downloadBaseline(cacheFile)
   }
-  return await cache.readFromCache(cacheFile)
+  return await u.cache.readFromCache(cacheFile)
 }
 
 /**

@@ -1,4 +1,4 @@
-import { sliceSumBins } from '../src/bin-utils'
+import { sliceSumBins } from '../src/utils/bins'
 import { expect } from 'chai'
 import * as almostEqual from 'almost-equal'
 import * as arrayEqual from 'array-equal'

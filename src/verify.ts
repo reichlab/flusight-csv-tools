@@ -6,7 +6,7 @@ import { TargetId, RegionId, Bin } from './interfaces'
 import * as assert from 'assert'
 import * as almostEqual from 'almost-equal'
 import * as arrayEqual from 'array-equal'
-import { inferPoint } from './bin-utils'
+import * as u from './utils'
 
 /**
  * Check whether the point predictions are alright
@@ -17,7 +17,7 @@ export function verifyPoint(csv: Csv) {
       let bins = csv.getBins(target, region)
       let point = csv.getPoint(target, region)
       assert(
-        almostEqual(point, inferPoint(bins), almostEqual.FLT_EPSILON),
+        almostEqual(point, u.bins.inferPoint(bins), almostEqual.FLT_EPSILON),
         `Point for target ${target}, region ${region} should be equal to inferred.`
       )
     })

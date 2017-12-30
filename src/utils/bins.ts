@@ -1,7 +1,7 @@
 // Module for working with Bins
 
 import * as almostEqual from 'almost-equal'
-import { Bin } from './interfaces'
+import { Bin } from '../interfaces'
 
 /**
  * Tell whether the bins represent
