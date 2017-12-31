@@ -69,13 +69,16 @@ export default class CSV {
       }
     }
 
-    // TODO Handle none bin of onset properly
+    // Extract none value separately and push it in the end
+    let noneVal = null
     if (target === 'onset-wk') {
-      process.emitWarning('Removing none bin from onset')
-      bins = bins.filter(row => row[0] !== 'none')
+      let noneIdx = bins.findIndex(b => b[0] === 'none')
+      noneVal = bins[noneIdx][2]
+      bins.splice(noneIdx, 1)
     }
-
-    return bins.sort(targetType[target] === 'percent' ? comparePercentage : compareWeeks)
+    bins = bins.sort(targetType[target] === 'percent' ? comparePercentage : compareWeeks)
+    if (noneVal !== null) bins.push([null, null, noneVal])
+    return bins
   }
 
   /**
