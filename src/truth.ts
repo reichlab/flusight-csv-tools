@@ -78,9 +78,9 @@ export const getBaseline = memoize(getBaselineUnopt)
  * object keyed by region ids having a list of { epiweek, wili } items as values
  */
 export async function getSeasonData(season: SeasonId, lag?: number): Promise<any> {
-  let cacheFile = `actual-${season}-${lag || 'latest'}-${currentEpiweek()}.json`
+  let cacheFile = `seasondata-${season}-lag-${lag || 'latest'}-${currentEpiweek()}.json`
 
-  if (u.cache.isInCache(cacheFile)) {
+  if (await u.cache.isInCache(cacheFile)) {
     return await u.cache.readFromCache(cacheFile)
   } else {
     let data = await delphi.requestSeasonData(season, lag)
@@ -92,7 +92,7 @@ export async function getSeasonData(season: SeasonId, lag?: number): Promise<any
           acc[region].push({ epiweek, wili })
           return acc
         }, {})
-      await u.cache.writeInCache(cacheFile, formattedData)
+      await u.cache.writeInCache(cacheFile, JSON.stringify(formattedData))
       return formattedData
     } else {
       console.log(`Warning: Delphi api says "${data.message}" for ${season}, lag ${lag}.`)

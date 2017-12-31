@@ -46,7 +46,7 @@ export async function readFromCache(cacheFile: string): Promise<any> {
 /**
  * Write the provided data in cacheFile
  */
-export async function writeInCache(cacheFile: string, data: any):  Promise<string> {
+export async function writeInCache(cacheFile: string, data: string):  Promise<string> {
   await fs.ensureDir(CACHE_DIR)
   await fs.writeFile(path.join(CACHE_DIR, cacheFile), data)
   return cacheFile
