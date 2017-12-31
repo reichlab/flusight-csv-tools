@@ -6,7 +6,6 @@ import * as delphi from './delphi'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 import * as download from 'download'
-import * as memoize from 'fast-memoize'
 import * as u from './utils'
 
 // Url for fetching baseline data from
@@ -89,18 +88,13 @@ export async function getBaselineData(cacheFile: string): Promise<Array<any>> {
 /**
  * Return baseline value
  */
-async function getBaselineUnopt(region: RegionId, season: SeasonId): Promise<number> {
+export async function getBaseline(region: RegionId, season: SeasonId): Promise<number> {
   let data = await getBaselineData('wILI_Baseline.csv')
   let regionCsvName = regionFullName[region].split(' ').slice(1).join('')
   let seasonCsvName = `${season}/${season + 1}`
   let colIdx = data[0].indexOf(seasonCsvName)
   return data.find(row => row[0] === regionCsvName)[colIdx]
 }
-
-/**
- * Memoized version of getBaselineUnopt
- */
-export const getBaseline = memoize(getBaselineUnopt)
 
 /**
  * Return season data for the given lag value (or latest). Return value is an
