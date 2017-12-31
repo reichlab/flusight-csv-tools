@@ -14,3 +14,12 @@ export type SeasonId = number
 
 // Epiweek in the format yyyyww
 export type Epiweek = number
+
+export type EpiweekWili = {
+  epiweek: Epiweek
+  wili: number
+  lagData: {
+    lag: number
+    wili: number
+  }[]
+}

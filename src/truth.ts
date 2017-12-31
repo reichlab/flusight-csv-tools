@@ -1,11 +1,12 @@
 // Module for working with truth related data
 
-import { SeasonId, RegionId, Epiweek } from './interfaces'
-import { regionIds, regionFullName } from './meta'
+import { SeasonId, RegionId, TargetId, Epiweek, EpiweekWili } from './interfaces'
+import { targetIds, regionIds, regionFullName } from './meta'
 import * as delphi from './delphi'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 import * as download from 'download'
+import * as arrayEqual from 'array-equal'
 import * as u from './utils'
 
 // Url for fetching baseline data from
@@ -100,7 +101,7 @@ export async function getBaseline(region: RegionId, season: SeasonId): Promise<n
  * Return season data for the given lag value (or latest). Return value is an
  * object keyed by region ids having a list of { epiweek, wili } items as values
  */
-export async function getSeasonData(season: SeasonId, lag?: number): Promise<any> {
+export async function getSeasonData(season: SeasonId, lag?: number): Promise<{ [R in RegionId] : EpiweekWili[] }> {
   let cacheFile = `seasondata-${season}-lag-${lag || 'latest'}-${currentEpiweek()}.json`
 
   if (await u.cache.isInCache(cacheFile)) {
@@ -118,7 +119,7 @@ export async function getSeasonData(season: SeasonId, lag?: number): Promise<any
       await u.cache.writeInCache(cacheFile, JSON.stringify(formattedData))
       return formattedData
     } else {
-      console.log(`Warning: Delphi api says "${data.message}" for ${season}, lag ${lag}.`)
+      console.log(`Warning: Delphi api says "${data.message}" for ${season}, lag ${lag || 'latest'}.`)
       return null
     }
   }
@@ -128,7 +129,7 @@ export async function getSeasonData(season: SeasonId, lag?: number): Promise<any
  * Same as getSeasonDataLatestLag but works on a list of seasons and return
  * Promise.all value
  */
-export function getSeasonsData(seasons: SeasonId[], lag?: number): Promise<any[]> {
+export function getSeasonsData(seasons: SeasonId[], lag?: number): Promise<{ [R in RegionId] : EpiweekWili[] }[]> {
   return Promise.all(seasons.map(s => getSeasonData(s, lag)))
 }
 
@@ -137,7 +138,7 @@ export function getSeasonsData(seasons: SeasonId[], lag?: number): Promise<any[]
  * by region ids having a list of { epiweek, wili, { lagData: [{ lag, wili } ...] }} items
  * as values
  */
-export async function getSeasonDataAllLags(season: SeasonId): Promise<any> {
+export async function getSeasonDataAllLags(season: SeasonId): Promise<{ [R in RegionId] : EpiweekWili[] }> {
   let lags = [...Array(52).keys()]
 
   let latestData = await getSeasonData(season)
@@ -161,6 +162,85 @@ export async function getSeasonDataAllLags(season: SeasonId): Promise<any> {
   return latestData
 }
 
-export async function getTrueOnset(epiweek: Epiweek, region: RegionId): Promise<number> {
-  return null
+/**
+ * Return peak and peak-wk after checking if we have all available data for the season
+ */
+function parsePeak(ewPairs: EpiweekWili[], allEpiweeks: Epiweek[]): { [index: string]: number } {
+  // Check if we have all the weeks available
+  if (arrayEqual(ewPairs.map(ew => ew.epiweek).sort((a, b) => a - b), allEpiweeks)) {
+    let peak = Math.max(...ewPairs.map(ew => ew.wili))
+    return { peak, 'peak-wk': ewPairs.find(ew => ew.wili === peak).epiweek }
+  } else {
+    return { peak: null, 'peak-wk': null }
+  }
+}
+
+/**
+ * Return onset week
+ * TODO: Verify that this is correct
+ */
+function parseOnset(ewPairs: EpiweekWili[], baseline: number): number {
+  let onset = null
+  let carry = 0
+
+  for (let ew of ewPairs) {
+    if (ew.wili >= baseline) {
+      if (carry === 0) {
+        onset = ew.epiweek
+      }
+      carry += 1
+    } else {
+      carry = 0
+    }
+
+    if (carry >= 3) {
+      return onset
+    }
+  }
+
+  return onset
+}
+
+/**
+ * Return nAhead week ahead truth value starting at startAt
+ */
+function parseWeekAhead(ewPairs: EpiweekWili[], startAt: Epiweek, nAhead: number): number {
+  let futureEpiweek = epiweekDiff(startAt, nAhead)
+  let futureEw = ewPairs.find(({ epiweek }) => epiweek === futureEpiweek)
+  return futureEw ? futureEw.wili : null
+}
+
+/**
+ * Find true target values for given season. Return a promise of an object keyed by region
+ * id having a list of { target: truth } items
+ */
+export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string]: { [index: string]: number }[] }> {
+  let seasonData = await getSeasonData(season)
+  let allEpiweeks = seasonEpiweeks(season)
+
+  let truth: { [index: string]: { [index: string]: number }[] } = {}
+
+  for (let region of regionIds) {
+    let regionSub = seasonData ? seasonData[region] : []
+    truth[region] = []
+
+    // Find truth for seasonal targets
+    let regionPeak = parsePeak(regionSub, allEpiweeks)
+    let baseline = await getBaseline(region, season)
+    let regionOnset = parseOnset(regionSub, baseline)
+
+    for (let epiweek of allEpiweeks) {
+      truth[region].push({
+        epiweek,
+        1: parseWeekAhead(regionSub, epiweek, 1),
+        2: parseWeekAhead(regionSub, epiweek, 2),
+        3: parseWeekAhead(regionSub, epiweek, 3),
+        4: parseWeekAhead(regionSub, epiweek, 4),
+        'onset-wk': regionOnset,
+        ...regionPeak
+      })
+    }
+  }
+
+  return truth
 }
