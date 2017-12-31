@@ -1,7 +1,8 @@
 // Module for working with Bins
 
 import * as almostEqual from 'almost-equal'
-import { Bin } from '../interfaces'
+import { Bin, TargetId } from '../interfaces'
+import { targetType } from '../meta'
 
 /**
  * Tell whether the bins represent
@@ -39,4 +40,48 @@ export function sliceSumBins(bins: Bin[], batch: number): Bin[] {
     }
     return acc
   }, [])
+}
+
+/**
+ * Compare bins of percent type (week ahead and peak bins)
+ */
+function comparePercentBins(a: Bin, b: Bin): number {
+  return a[0] - b[0]
+}
+
+/**
+ * Compare bins of week type (onset-wk and peak-wk)
+ */
+function compareWeekBins(a: Bin, b: Bin): number {
+  if ((a[0] >= 30) && (b[0] < 30)) {
+    return -1
+  } else if ((a[0] < 30) && (b[0] >= 30)) {
+    return 1
+  } else {
+    return a[0] - b[0]
+  }
+}
+
+/**
+ * Sort bins appropriately using the target information
+ */
+export function sortBins(bins: Bin[], target: TargetId): Bin[] {
+  // Extract none value separately and push it in the end
+  let noneVal = null
+  if (target === 'onset-wk') {
+    let noneIdx = bins.findIndex(b => b[0].toString() === 'none')
+    noneVal = bins[noneIdx][2]
+    bins.splice(noneIdx, 1)
+  }
+  bins = bins.sort(targetType[target] === 'percent' ? comparePercentBins : compareWeekBins)
+  if (noneVal !== null) bins.push([null, null, noneVal])
+  return bins
+}
+
+/**
+ * Return bin in which the given value lies
+ */
+export function binFor(bins: Bin[], value: number): Bin {
+  // TODO
+  return bins[0]
 }

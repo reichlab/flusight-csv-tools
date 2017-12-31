@@ -1,5 +1,6 @@
 import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
-import { targetFullName, regionFullName, targetType } from './meta'
+import { targetFullName, regionFullName, targetType, regionIds, targetIds } from './meta'
+import * as u from './utils'
 import * as Papa from 'papaparse'
 import * as d3 from 'd3-collection'
 import * as fs from 'fs-extra'
@@ -12,7 +13,8 @@ export default class CSV {
   readonly model: string
   readonly filePath: string
   headers: string[]
-  data
+  private bins: { [index: string]: { [index: string]: Bin[] } }
+  private points: { [index: string]: { [index: string]: number } }
 
   /**
    * Initialize the csv with filename and some metadata
@@ -21,64 +23,73 @@ export default class CSV {
     this.filePath = filePath
     this.epiweek = epiweek
     this.model = model
-    this.readCsv()
+    this.parseCsv()
   }
 
   /**
    * Parse and read the csv
    */
-  private readCsv() {
-    let csvData = Papa.parse(fs.readFileSync(this.filePath, 'utf8'), {
+  private parseCsv() {
+    let csvRows = Papa.parse(fs.readFileSync(this.filePath, 'utf8'), {
       dynamicTyping: true
     }).data
 
-    this.headers = csvData[0]
-    this.data = d3.nest()
+    this.headers = csvRows[0]
+    let csvData = d3.nest()
       .key(d => d[0]) // region
       .key(d => d[1]) // target
-      .object(csvData.slice(1).filter(d => !(d.length === 1 && d[0] === '')))
+      .object(csvRows.slice(1).filter(d => !(d.length === 1 && d[0] === '')))
+    this.parseBins(csvData)
+    this.parsePoints(csvData)
   }
 
   /**
-   * Return a point value for given target and region. The value is taken
-   * directly from the csv without trying to infer it from bins. The verification
-   * module takes care of checking where the provided point value matches with the
-   * inferred value.
+   * Parse bin data for all the regions and targets
    */
-  getPoint(target: TargetId, region: RegionId): number {
-    return this.data[regionFullName[region]][targetFullName[target]]
-      .find(row => row[2] == 'Point')[6]
+  private parseBins(csvData) {
+    this.bins = {}
+    for (let region of regionIds) {
+      this.bins[region] = {}
+      for (let target of targetIds) {
+        let bins = csvData[regionFullName[region]][targetFullName[target]]
+          .filter(row => row[2] == 'Bin')
+          .map(row => [row[4], row[5], row[6]]) // bin start, bin end, value
+        this.bins[region][target] = u.bins.sortBins(bins, target)
+      }
+    }
   }
 
   /**
    * Return an array of bin values for given target and region.
    */
   getBins(target: TargetId, region: RegionId): Bin[] {
-    let bins = this.data[regionFullName[region]][targetFullName[target]]
-      .filter(row => row[2] == 'Bin')
-      .map(row => [row[4], row[5], row[6]]) // bin start, bin end, value
+    return this.bins[region][target]
+  }
 
-    let comparePercentage = (a, b) => a[0] - b[0]
-    let compareWeeks = (a, b) => {
-      if ((a[0] >= 30) && (b[0] < 30)) {
-        return -1
-      } else if ((a[0] < 30) && (b[0] >= 30)) {
-        return 1
-      } else {
-        return a[0] - b[0]
+  /**
+   * Parse point data for all the region and targets
+   */
+  private parsePoints(csvData) {
+    this.points = {}
+    for (let region of regionIds) {
+      this.points[region] = {}
+      for (let target of targetIds) {
+        let point = csvData[regionFullName[region]][targetFullName[target]]
+          .find(row => row[2] == 'Point')[6]
+        if (point === 'NA') {
+          point = u.bins.inferPoint(this.getBins(target, region))
+        }
+
+        this.points[region][target] = point
       }
     }
+  }
 
-    // Extract none value separately and push it in the end
-    let noneVal = null
-    if (target === 'onset-wk') {
-      let noneIdx = bins.findIndex(b => b[0] === 'none')
-      noneVal = bins[noneIdx][2]
-      bins.splice(noneIdx, 1)
-    }
-    bins = bins.sort(targetType[target] === 'percent' ? comparePercentage : compareWeeks)
-    if (noneVal !== null) bins.push([null, null, noneVal])
-    return bins
+  /**
+   * Return a point value for given target and region
+   */
+  getPoint(target: TargetId, region: RegionId): number {
+    return this.points[region][target]
   }
 
   /**
