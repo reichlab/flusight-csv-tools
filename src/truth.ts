@@ -71,7 +71,7 @@ async function downloadBaseline(cacheFile: string): Promise<string> {
  * Ensure that an up to date baseline csv is available in cache and
  * return the data
  */
-export async function getBaselineData(cacheFile: string): Promise<Array<any>> {
+async function getBaselineData(cacheFile: string): Promise<Array<any>> {
   if (await u.cache.isInCache(cacheFile)) {
     let seasons = (await u.cache.readFromCache(cacheFile))[0].map(d => parseInt(d.split('/')[0]))
     if (seasons.indexOf(currentSeasonId()) === -1) {
