@@ -1,4 +1,4 @@
-import { getBaseline } from '../src/truth'
+import { getBaseline, getSeasonData } from '../src/truth'
 import { expect } from 'chai'
 import * as almostEqual from 'almost-equal'
 import 'mocha'
