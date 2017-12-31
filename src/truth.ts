@@ -22,12 +22,31 @@ export function currentEpiweek(): Epiweek {
 }
 
 /**
+ * Return seasons for given epiweek. Assume seasons start from
+ * mmwr-week 30 and end on next year's week 29
+ */
+export function seasonFromEpiweek(epiweek: Epiweek): SeasonId {
+  let year = Math.trunc(epiweek / 100)
+  return (epiweek % 100 >= 30) ? year : year - 1
+}
+
+/**
  * Return id for current season
  */
 export function currentSeasonId(): SeasonId {
-  let ew = currentEpiweek()
-  let year = Math.trunc(ew / 100)
-  return (ew % 100 >= 30) ? year : year - 1
+  return seasonFromEpiweek(currentEpiweek())
+}
+
+/**
+ * Return a list of epiweeks in the season provided
+ */
+export function seasonEpiweeks(season: SeasonId): Epiweek[] {
+  let arange = (a, b) => [...Array(b - a).keys()].map(i => i + a)
+  let maxWeek = (new mmwr.MMWRDate(season, 30)).nWeeks
+  return [
+    ...arange(100 * season + 30, 100 * season + maxWeek + 1),
+    ...arange(100 * (season + 1) + 1, 100 * (season + 1) + 30)
+  ]
 }
 
 /**
@@ -136,4 +155,8 @@ export async function getSeasonDataAllLags(season: SeasonId): Promise<any> {
     })
   })
   return latestData
+}
+
+export async function getTrueOnset(epiweek: Epiweek, region: RegionId): Promise<number> {
+  return null
 }
