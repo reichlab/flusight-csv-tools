@@ -31,6 +31,16 @@ export function seasonFromEpiweek(epiweek: Epiweek): SeasonId {
 }
 
 /**
+ * Return epiweek with diff number of weeks added
+ */
+export function epiweekDiff(epiweek: Epiweek, diff: number): Epiweek {
+  let mdate = new mmwr.MMWRDate()
+  mdate.fromEpiweek(epiweek)
+  mdate.applyWeekDiff(diff)
+  return mdate.toEpiweek()
+}
+
+/**
  * Return id for current season
  */
 export function currentSeasonId(): SeasonId {
