@@ -3,6 +3,7 @@ import * as interfaces from './interfaces'
 import * as meta from './meta'
 import * as score from './score'
 import * as truth from './truth'
+import * as utils from './utils'
 import * as verify from './verify'
 
 export {
@@ -11,5 +12,6 @@ export {
   meta,
   score,
   truth,
+  utils,
   verify
 }
