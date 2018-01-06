@@ -149,7 +149,8 @@ export async function getSeasonDataAllLags(season: SeasonId): Promise<{ [R in Re
       let lagValues = lagData
         .filter(d => d)
         .map((ld, idx) => {
-          let lagItem = ld[rid].find(d => d.epiweek === epiweek)
+          let lagItem
+          if (ld[rid]) lagItem = ld[rid].find(d => d.epiweek === epiweek)
           return lagItem ? { epiweek: lagItem.epiweek, wili: lagItem.wili, lag: lags[idx] } : null
         })
         .filter(d => d)
