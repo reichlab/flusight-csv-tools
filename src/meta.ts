@@ -27,30 +27,30 @@ export const regionIds: RegionId[] = [
 ]
 
 export const targetIds: TargetId[] = [
-  1,
-  2,
-  3,
-  4,
+  '1-ahead',
+  '2-ahead',
+  '3-ahead',
+  '4-ahead',
   'peak',
   'peak-wk',
   'onset-wk'
 ]
 
 export const targetFullName = {
-  1: '1 wk ahead',
-  2: '2 wk ahead',
-  3: '3 wk ahead',
-  4: '4 wk ahead',
+  '1-ahead': '1 wk ahead',
+  '2-ahead': '2 wk ahead',
+  '3-ahead': '3 wk ahead',
+  '4-ahead': '4 wk ahead',
   'peak': 'Season peak percentage',
   'peak-wk': 'Season peak week',
   'onset-wk': 'Season onset'
 }
 
 export const targetType = {
-  1: 'percent',
-  2: 'percent',
-  3: 'percent',
-  4: 'percent',
+  '1-ahead': 'percent',
+  '2-ahead': 'percent',
+  '3-ahead': 'percent',
+  '4-ahead': 'percent',
   'peak': 'percent',
   'peak-wk': 'week',
   'onset-wk': 'week'

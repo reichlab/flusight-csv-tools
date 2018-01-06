@@ -1,6 +1,6 @@
 // Module for working with truth related data
 
-import { SeasonId, RegionId, TargetId, Epiweek, EpiweekWili } from './interfaces'
+import { SeasonId, RegionId, TargetId, Epiweek, EpiweekWili, EpiweekWiliLag } from './interfaces'
 import { targetIds, regionIds, regionFullName } from './meta'
 import * as delphi from './delphi'
 import * as mmwr from 'mmwr-week'
@@ -138,10 +138,10 @@ export function getSeasonsData(seasons: SeasonId[], lag?: number): Promise<{ [R 
  * by region ids having a list of { epiweek, wili, { lagData: [{ lag, wili } ...] }} items
  * as values
  */
-export async function getSeasonDataAllLags(season: SeasonId): Promise<{ [R in RegionId] : EpiweekWili[] }> {
+export async function getSeasonDataAllLags(season: SeasonId): Promise<{ [R in RegionId] : EpiweekWiliLag[] }> {
   let lags = [...Array(52).keys()]
 
-  let latestData = await getSeasonData(season)
+  let latestData = (await getSeasonData(season)) as { [R in RegionId] : EpiweekWiliLag[] }
   let lagData = await Promise.all(lags.map(l => getSeasonData(season, l)))
 
   regionIds.forEach(rid => {
