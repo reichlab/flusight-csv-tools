@@ -3,6 +3,7 @@
 import * as almostEqual from 'almost-equal'
 import { Bin, TargetId } from '../interfaces'
 import { targetType } from '../meta'
+import { isInCache } from './cache';
 
 /**
  * Tell whether the bins represent
@@ -79,9 +80,38 @@ export function sortBins(bins: Bin[], target: TargetId): Bin[] {
 }
 
 /**
- * Return bin in which the given value lies
+ * Return bin in which the given value lies. Assume bins are properly sorted.
+ * `value` can be null, in which case we look for the last bin (which is onset bin).
  */
 export function binFor(bins: Bin[], value: number): Bin {
-  // TODO
-  return bins[0]
+  let tolerance = 0.000000001
+
+  if (value === null) {
+    // We are looking for none bin of onset
+    if (bins[bins.length - 1][0] === null) {
+      return bins[bins.length - 1]
+    } else {
+      throw Error(`Bin with value ${value} not found`)
+    }
+  }
+
+  for (let bin of bins) {
+    if (almostEqual(bin[1], value, tolerance)) {
+      // Its the next bin
+      continue
+    } else {
+      if (bin[1] >= (value - tolerance)) {
+        return bin
+      }
+    }
+  }
+
+  // We are here mostly due to week 53 issue, the truth file has week 53 allowed,
+  // while the models might not use a bin start using week 53.
+  // We jump to week 1 here
+  if (almostEqual(value, 53, tolerance) || almostEqual(value, 54, tolerance)) {
+    return binFor(bins, 1)
+  } else {
+    throw new Error('Bin value not found')
+  }
 }
