@@ -44,23 +44,36 @@ export function sliceSumBins(bins: Bin[], batch: number): Bin[] {
 }
 
 /**
+ * Compare plain percent values
+ */
+function comparePercents(a: number, b: number): number {
+  return a - b
+}
+/**
  * Compare bins of percent type (week ahead and peak bins)
  */
 function comparePercentBins(a: Bin, b: Bin): number {
-  return a[0] - b[0]
+  return comparePercents(a[0], b[0])
+}
+
+/**
+ * Compare week values
+ */
+function compareWeeks(a: number, b: number): number {
+  if ((a >= 30) && (b < 30)) {
+    return -1
+  } else if ((a < 30) && (b >= 30)) {
+    return 1
+  } else {
+    return a - b
+  }
 }
 
 /**
  * Compare bins of week type (onset-wk and peak-wk)
  */
 function compareWeekBins(a: Bin, b: Bin): number {
-  if ((a[0] >= 30) && (b[0] < 30)) {
-    return -1
-  } else if ((a[0] < 30) && (b[0] >= 30)) {
-    return 1
-  } else {
-    return a[0] - b[0]
-  }
+  return compareWeeks(a[0], b[0])
 }
 
 /**
@@ -83,16 +96,46 @@ export function sortBins(bins: Bin[], target: TargetId): Bin[] {
  * Return bin in which the given value lies. Assume bins are properly sorted.
  * `value` can be null, in which case we look for the last bin (which is onset bin).
  */
-export function binFor(bins: Bin[], value: number): Bin {
+export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
   let tolerance = 0.000000001
+  let binType = targetType[target]
+  let notFoundError = new Error('Bin value not found')
+  let comparator
 
-  if (value === null) {
+  // Setup comparator function
+  if (binType === 'percent') {
+    comparator = comparePercents
+  } else if (binType === 'week') {
+    comparator = compareWeeks
+
     // We are looking for none bin of onset
-    if (bins[bins.length - 1][0] === null) {
-      return bins[bins.length - 1]
-    } else {
-      throw Error(`Bin with value ${value} not found`)
+    if (value === null) {
+      if (bins[bins.length - 1][0] === null) {
+        return bins[bins.length - 1]
+      } else {
+        throw notFoundError
+      }
     }
+
+    // Work only with ints for weeks
+    value = Math.floor(value)
+
+    let nWeeks = Math.max(...bins.filter(b => b).map(b => b[0]))
+    if (value === 0) {
+      // If we have 0, use the last week of season's first year instead
+      value = nWeeks
+    } else if (value > nWeeks) {
+      throw notFoundError
+    }
+  }
+
+  // Find bin range for rejecting values
+  let binMin = bins[0][0]
+  let binMax = (bins[bins.length - 1][0] === null) ? bins[bins.length - 2][1] : bins[bins.length - 1][1]
+
+  if ((comparator(value, binMin - tolerance) < 0)
+      || (comparator(value, binMax + tolerance) > 0)) {
+    throw notFoundError
   }
 
   for (let bin of bins) {
@@ -100,18 +143,13 @@ export function binFor(bins: Bin[], value: number): Bin {
       // Its the next bin
       continue
     } else {
-      if (bin[1] >= (value - tolerance)) {
+      if ((comparator(bin[1], (value - tolerance)) > 0)
+          || (almostEqual(bin[1], (value - tolerance), tolerance))) {
         return bin
       }
     }
   }
 
-  // We are here mostly due to week 53 issue, the truth file has week 53 allowed,
-  // while the models might not use a bin start using week 53.
-  // We jump to week 1 here
-  if (almostEqual(value, 53, tolerance) || almostEqual(value, 54, tolerance)) {
-    return binFor(bins, 1)
-  } else {
-    throw new Error('Bin value not found')
-  }
+  // In unexpected situation
+  throw notFoundError
 }
