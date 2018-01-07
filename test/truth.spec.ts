@@ -11,7 +11,7 @@ describe('Baseline', () => {
     expect(almostEqual(await truth.getBaseline('hhs10', 2007), 3.3, almostEqual.FLT_EPSILON)).to.be.true
     expect(almostEqual(await truth.getBaseline('hhs1', 2009), 1.2, almostEqual.FLT_EPSILON)).to.be.true
     expect(almostEqual(await truth.getBaseline('hhs5', 2014), 1.7, almostEqual.FLT_EPSILON)).to.be.true
-  })
+  }).timeout(0)
 })
 
 describe('Season weeks', () => {
@@ -34,7 +34,7 @@ describe('Onset calculation', () => {
     for (let region of regionIds) {
       expect(seasonTruth[region].every(d => d['onset-wk'] === null)).to.be.true
     }
-  })
+  }).timeout(0)
 
   it('should be correct for past stable seasons', async () => {
     let onsetWks = {
@@ -67,7 +67,7 @@ describe('Onset calculation', () => {
         expect(seasonTruth[region].every(d => d['onset-wk'] === onsetWks[season][region])).to.be.true
       }
     }
-  })
+  }).timeout(0)
 })
 
 describe('Peak calculations', () => {
@@ -79,7 +79,7 @@ describe('Peak calculations', () => {
       expect(seasonTruth[region].every(d => d['peak'] === null)).to.be.true
       expect(seasonTruth[region].every(d => d['peak-wk'] === null)).to.be.true
     }
-  })
+  }).timeout(0)
 
   it('should be null for current season', async () => {
     let season = truth.currentSeasonId()
@@ -89,7 +89,7 @@ describe('Peak calculations', () => {
       expect(seasonTruth[region].every(d => d['peak'] === null)).to.be.true
       expect(seasonTruth[region].every(d => d['peak-wk'] === null)).to.be.true
     }
-  })
+  }).timeout(0)
 
   it('should be correct for past stable seasons', async () => {
     let peaks = {
@@ -125,5 +125,5 @@ describe('Peak calculations', () => {
         expect(seasonTruth[region].every(d => d['peak-wk'] === peaks[season][region][1])).to.be.true
       }
     }
-  })
+  }).timeout(0)
 })
