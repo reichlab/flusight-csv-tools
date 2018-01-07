@@ -233,10 +233,10 @@ export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string
     for (let epiweek of allEpiweeks) {
       truth[region].push({
         epiweek,
-        1: parseWeekAhead(regionSub, epiweek, 1),
-        2: parseWeekAhead(regionSub, epiweek, 2),
-        3: parseWeekAhead(regionSub, epiweek, 3),
-        4: parseWeekAhead(regionSub, epiweek, 4),
+        '1-ahead': parseWeekAhead(regionSub, epiweek, 1),
+        '2-ahead': parseWeekAhead(regionSub, epiweek, 2),
+        '3-ahead': parseWeekAhead(regionSub, epiweek, 3),
+        '4-ahead': parseWeekAhead(regionSub, epiweek, 4),
         'onset-wk': regionOnset,
         ...regionPeak
       })
