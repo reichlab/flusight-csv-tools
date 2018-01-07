@@ -1,4 +1,5 @@
 import { truth } from '../src/'
+import * as u from '../src/utils'
 import { regionIds, targetIds } from '../src/meta'
 import { expect } from 'chai'
 import * as almostEqual from 'almost-equal'
@@ -16,11 +17,11 @@ describe('Baseline', () => {
 
 describe('Season weeks', () => {
   it('should be correct for regular seasons', () => {
-    expect(truth.seasonEpiweeks(2012).length).to.equal(52)
+    expect(u.epiweek.seasonEpiweeks(2012).length).to.equal(52)
   })
 
   it('should be correct for 53 week season', () => {
-    let epiweeks = truth.seasonEpiweeks(2014)
+    let epiweeks = u.epiweek.seasonEpiweeks(2014)
     expect(epiweeks.length).to.equal(53)
     expect(epiweeks.indexOf(201453) > -1).to.be.true
   })
@@ -28,7 +29,7 @@ describe('Season weeks', () => {
 
 describe('Onset calculation', () => {
   it('should be null for next season', async () => {
-    let season = truth.currentSeasonId() + 1
+    let season = u.epiweek.currentSeasonId() + 1
     let seasonTruth = await truth.getSeasonTruth(season)
 
     for (let region of regionIds) {
@@ -72,7 +73,7 @@ describe('Onset calculation', () => {
 
 describe('Peak calculations', () => {
   it('should be null for next season', async () => {
-    let season = truth.currentSeasonId() + 1
+    let season = u.epiweek.currentSeasonId() + 1
     let seasonTruth = await truth.getSeasonTruth(season)
 
     for (let region of regionIds) {
@@ -82,7 +83,7 @@ describe('Peak calculations', () => {
   }).timeout(0)
 
   it('should be null for current season', async () => {
-    let season = truth.currentSeasonId()
+    let season = u.epiweek.currentSeasonId()
     let seasonTruth = await truth.getSeasonTruth(season)
 
     for (let region of regionIds) {

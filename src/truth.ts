@@ -13,53 +13,6 @@ import * as u from './utils'
 const BASELINE_URL = 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'
 
 /**
- * Return current epiweek
- */
-export function currentEpiweek(): Epiweek {
-  let mdate = new mmwr.MMWRDate()
-  mdate.fromMomentDate(moment())
-  return mdate.year * 100 + mdate.week
-}
-
-/**
- * Return seasons for given epiweek. Assume seasons start from
- * mmwr-week 30 and end on next year's week 29
- */
-export function seasonFromEpiweek(epiweek: Epiweek): SeasonId {
-  let year = Math.trunc(epiweek / 100)
-  return (epiweek % 100 >= 30) ? year : year - 1
-}
-
-/**
- * Return epiweek with diff number of weeks added
- */
-export function epiweekDiff(epiweek: Epiweek, diff: number): Epiweek {
-  let mdate = new mmwr.MMWRDate()
-  mdate.fromEpiweek(epiweek)
-  mdate.applyWeekDiff(diff)
-  return mdate.toEpiweek()
-}
-
-/**
- * Return id for current season
- */
-export function currentSeasonId(): SeasonId {
-  return seasonFromEpiweek(currentEpiweek())
-}
-
-/**
- * Return a list of epiweeks in the season provided
- */
-export function seasonEpiweeks(season: SeasonId): Epiweek[] {
-  let arange = (a, b) => [...Array(b - a).keys()].map(i => i + a)
-  let maxWeek = (new mmwr.MMWRDate(season, 30)).nWeeks
-  return [
-    ...arange(100 * season + 30, 100 * season + maxWeek + 1),
-    ...arange(100 * (season + 1) + 1, 100 * (season + 1) + 30)
-  ]
-}
-
-/**
  * Download baseline csv file to given path and return a promise for the path
  */
 async function downloadBaseline(cacheFile: string): Promise<string> {
@@ -75,7 +28,7 @@ async function downloadBaseline(cacheFile: string): Promise<string> {
 async function getBaselineData(cacheFile: string): Promise<Array<any>> {
   if (await u.cache.isInCache(cacheFile)) {
     let seasons = (await u.cache.readFromCache(cacheFile))[0].map(d => parseInt(d.split('/')[0]))
-    if (seasons.indexOf(currentSeasonId()) === -1) {
+    if (seasons.indexOf(u.epiweek.currentSeasonId()) === -1) {
       console.log('Baseline file not valid, downloading...')
       await downloadBaseline(cacheFile)
     }
@@ -102,7 +55,7 @@ export async function getBaseline(region: RegionId, season: SeasonId): Promise<n
  * object keyed by region ids having a list of { epiweek, wili } items as values
  */
 export async function getSeasonData(season: SeasonId, lag?: number): Promise<{ [R in RegionId] : EpiweekWili[] }> {
-  let cacheFile = `seasondata-${season}-lag-${lag || 'latest'}-${currentEpiweek()}.json`
+  let cacheFile = `seasondata-${season}-lag-${lag || 'latest'}-${u.epiweek.currentEpiweek()}.json`
 
   if (await u.cache.isInCache(cacheFile)) {
     return await u.cache.readFromCache(cacheFile)
@@ -206,7 +159,7 @@ function parseOnset(ewPairs: EpiweekWili[], baseline: number): number {
  * Return nAhead week ahead truth value starting at startAt
  */
 function parseWeekAhead(ewPairs: EpiweekWili[], startAt: Epiweek, nAhead: number): number {
-  let futureEpiweek = epiweekDiff(startAt, nAhead)
+  let futureEpiweek = u.epiweek.epiweekWithDiff(startAt, nAhead)
   let futureEw = ewPairs.find(({ epiweek }) => epiweek === futureEpiweek)
   return futureEw ? futureEw.wili : null
 }
@@ -217,7 +170,7 @@ function parseWeekAhead(ewPairs: EpiweekWili[], startAt: Epiweek, nAhead: number
  */
 export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string]: { [index: string]: number }[] }> {
   let seasonData = await getSeasonData(season)
-  let allEpiweeks = seasonEpiweeks(season)
+  let allEpiweeks = u.epiweek.seasonEpiweeks(season)
 
   let truth: { [index: string]: { [index: string]: number }[] } = {}
 
