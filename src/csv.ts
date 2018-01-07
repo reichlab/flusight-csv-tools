@@ -28,6 +28,7 @@ export default class CSV {
 
   /**
    * Parse and read the csv
+   * TODO: Standardize bins before saving
    */
   private parseCsv() {
     let csvRows = Papa.parse(fs.readFileSync(this.filePath, 'utf8'), {
