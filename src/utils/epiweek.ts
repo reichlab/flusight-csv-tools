@@ -1,4 +1,4 @@
-import { SeasonId, Epiweek } from '../interfaces'
+import { SeasonId, Epiweek, EpiweekWiliLag } from '../interfaces'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 
@@ -28,6 +28,19 @@ export function epiweekWithDiff(epiweek: Epiweek, diff: number): Epiweek {
   mdate.fromEpiweek(epiweek)
   mdate.applyWeekDiff(diff)
   return mdate.toEpiweek()
+}
+
+/**
+ * Return equivalent of first - second in epiweek scale
+ */
+export function getEpiweekDiff(first: Epiweek, second: Epiweek): number {
+  let firstDate = new mmwr.MMWRDate()
+  let secondDate = new mmwr.MMWRDate()
+
+  firstDate.fromEpiweek(first)
+  secondDate.fromEpiweek(second)
+
+  return firstDate.diffWeek(secondDate)
 }
 
 /**
