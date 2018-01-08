@@ -6,7 +6,7 @@ import * as moment from 'moment'
  * Return current epiweek
  */
 export function currentEpiweek(): Epiweek {
-  let mdate = new mmwr.MMWRDate()
+  let mdate = new mmwr.MMWRDate(0)
   mdate.fromMomentDate(moment())
   return mdate.year * 100 + mdate.week
 }
@@ -24,7 +24,7 @@ export function seasonFromEpiweek(epiweek: Epiweek): SeasonId {
  * Return epiweek with diff number of weeks added
  */
 export function epiweekWithDiff(epiweek: Epiweek, diff: number): Epiweek {
-  let mdate = new mmwr.MMWRDate()
+  let mdate = new mmwr.MMWRDate(0)
   mdate.fromEpiweek(epiweek)
   mdate.applyWeekDiff(diff)
   return mdate.toEpiweek()
@@ -34,8 +34,8 @@ export function epiweekWithDiff(epiweek: Epiweek, diff: number): Epiweek {
  * Return equivalent of first - second in epiweek scale
  */
 export function getEpiweekDiff(first: Epiweek, second: Epiweek): number {
-  let firstDate = new mmwr.MMWRDate()
-  let secondDate = new mmwr.MMWRDate()
+  let firstDate = new mmwr.MMWRDate(0)
+  let secondDate = new mmwr.MMWRDate(0)
 
   firstDate.fromEpiweek(first)
   secondDate.fromEpiweek(second)
