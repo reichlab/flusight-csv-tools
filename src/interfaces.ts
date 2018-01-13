@@ -1,4 +1,6 @@
-// Interfaces and types
+/**
+ * Interfaces and types
+ */
 
 /**
  * A bin with start value (inclusive), end value (exclusive) and probability.

@@ -1,5 +1,10 @@
-// Module for working with truth related data
+/**
+ * Module for working with truth related data
+ */
 
+/**
+ * Doc guard
+ */
 import { SeasonId, RegionId, TargetId, Epiweek, EpiweekWili, EpiweekWiliLag } from './interfaces'
 import { targetIds, regionIds, regionFullName } from './meta'
 import * as delphi from './delphi'
@@ -9,7 +14,9 @@ import * as download from 'download'
 import * as arrayEqual from 'array-equal'
 import * as u from './utils'
 
-// Url for fetching baseline data from
+/**
+ * Url for fetching baseline data from
+ */
 const BASELINE_URL = 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'
 
 /**

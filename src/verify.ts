@@ -1,5 +1,10 @@
-// Module for verifying csvs
+/**
+ * Module for verifying csvs
+ */
 
+/**
+ * Doc guard
+ */
 import Csv from './csv'
 import { targetIds, regionIds, headers } from './meta'
 import { TargetId, RegionId, Bin } from './interfaces'

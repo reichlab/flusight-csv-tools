@@ -1,10 +1,18 @@
-// Module to collect data from delphi epidata API (https://github.com/cmu-delphi/delphi-epidata)
+/**
+ * Module to collect data from delphi epidata API (https://github.com/cmu-delphi/delphi-epidata)
+ */
 
+/**
+ * Doc guard
+ */
 import * as rp from 'request-promise-native'
 import * as buildUrl from 'build-url'
 import { SeasonId } from './interfaces'
 import { regionIds } from './meta'
 
+/**
+ * Root url for the delphi API
+ */
 const API_ROOT = 'https://delphi.midas.cs.cmu.edu/epidata/api.php/'
 
 /**

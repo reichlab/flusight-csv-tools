@@ -1,3 +1,10 @@
+/**
+ * Module for csv reading functionality
+ */
+
+/**
+ * Doc guard
+ */
 import { Bin, RegionId, TargetId, Epiweek, SeasonId } from './interfaces'
 import { targetFullName, regionFullName, targetType, regionIds, targetIds } from './meta'
 import * as u from './utils'

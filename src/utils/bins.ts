@@ -1,5 +1,10 @@
-// Module for working with Bins
+/**
+ * Module for working with Bins
+ */
 
+/**
+ * Doc guard
+ */
 import * as almostEqual from 'almost-equal'
 import { Epiweek, Bin, TargetId } from '../interfaces'
 import { targetType } from '../meta'

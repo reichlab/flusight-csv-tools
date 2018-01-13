@@ -1,8 +1,18 @@
+/**
+ * Module with functions related to flusight-csv-tools cache
+ */
+
+/**
+ * Doc guard
+ */
 import * as Papa from 'papaparse'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import { userCacheDir } from 'appdirs'
 
+/**
+ * Cache directory path
+ */
 const CACHE_DIR = path.join(userCacheDir(), 'flusight-csv-tools')
 
 /**

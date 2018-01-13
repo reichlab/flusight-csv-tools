@@ -1,3 +1,10 @@
+/**
+ * Module for scoring related functions
+ */
+
+/**
+ * Doc guard
+ */
 import Csv from './csv'
 import * as memoize from 'fast-memoize'
 import * as truth from './truth'

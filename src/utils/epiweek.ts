@@ -1,3 +1,10 @@
+/**
+ * Epiweek and time related functions
+ */
+
+/**
+ * Doc guard
+ */
 import { SeasonId, Epiweek, EpiweekWiliLag } from '../interfaces'
 import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'

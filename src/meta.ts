@@ -1,7 +1,15 @@
-// Metadata. Mostly maps from abbreviations to corresponding text in csv
+/**
+ * Metadata and mappings from abbreviations to corresponding text in csv
+ */
 
+/**
+ * Doc guard
+ */
 import { RegionId, TargetId } from './interfaces'
 
+/**
+ * The headers expected in the csv files
+ */
 export const headers = [
   'location',
   'target',
@@ -12,6 +20,10 @@ export const headers = [
   'value'
 ]
 
+/**
+ * Short ids representing a region. These are used as the
+ * standard way of representing a region in the code.
+ */
 export const regionIds: RegionId[] = [
   'nat',
   'hhs1',
@@ -26,6 +38,10 @@ export const regionIds: RegionId[] = [
   'hhs10'
 ]
 
+/**
+ * Short ids representing a target. These are used as the
+ * standard way of representing a target in the code.
+ */
 export const targetIds: TargetId[] = [
   '1-ahead',
   '2-ahead',
@@ -36,6 +52,9 @@ export const targetIds: TargetId[] = [
   'onset-wk'
 ]
 
+/**
+ * Mapping from target ids to full name as used in the csvs
+ */
 export const targetFullName = {
   '1-ahead': '1 wk ahead',
   '2-ahead': '2 wk ahead',
@@ -46,6 +65,10 @@ export const targetFullName = {
   'onset-wk': 'Season onset'
 }
 
+/**
+ * Target type for each target. Note that there can be only two
+ * target types, 'percent' and 'week'.
+ */
 export const targetType = {
   '1-ahead': 'percent',
   '2-ahead': 'percent',
@@ -56,6 +79,10 @@ export const targetType = {
   'onset-wk': 'week'
 }
 
+/**
+ * Mapping from region ids to full region name as used in
+ * the csvs
+ */
 export const regionFullName = {
   'nat': 'US National',
   'hhs1': 'HHS Region 1',
@@ -70,7 +97,9 @@ export const regionFullName = {
   'hhs10': 'HHS Region 10'
 }
 
-// List of US states
+/**
+ * List of US state abbreviations
+ */
 export const stateIds =
   ['AK', 'AL', 'AR', 'AZ', 'CA', // 0-4
    'CO', 'CT', 'DC', 'DE', 'FL', // 5-9
@@ -84,7 +113,9 @@ export const stateIds =
    'VA', 'VT', 'WA', 'WI', 'WV', // 45-49
    'WY'] // 50
 
-// States in each region
+/**
+ * Mapping from region ids to the states in those regions
+ */
 export const regionStates = {
   'nat': stateIds,
   'hhs1': [6, 19, 21, 30, 39, 46].map(i => stateIds[i]),
