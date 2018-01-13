@@ -3,6 +3,30 @@ import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 
 /**
+ * Convert given week and season to epiweek, handle non standard values too
+ */
+export function weekToEpiweek(week: number, seasonId: SeasonId): Epiweek {
+  // Convert the point predictions to int first
+  week = Math.floor(week)
+
+  let nWeeks = (new mmwr.MMWRDate(seasonId)).nWeeks
+
+  // Wrap around values
+  if (week > nWeeks) {
+    week = week % nWeeks
+  }
+
+  if (week === 0) {
+    // We go back to the last value from past season
+    return seasonId * 100 + nWeeks
+  } else if (week >= 30) {
+    return seasonId * 100 + week
+  } else {
+    return (seasonId + 1) * 100 + week
+  }
+}
+
+/**
  * Return current epiweek
  */
 export function currentEpiweek(): Epiweek {

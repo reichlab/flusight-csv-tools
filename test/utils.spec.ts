@@ -150,3 +150,25 @@ describe('binFor', () => {
     })
   })
 })
+
+describe('Week to epiweek', () => {
+  it('should be correct for normal cases', () => {
+    let seasonId = 2017
+    let weeks = [2, 29, 30, 50, 51, 52]
+    let eweeks = [201802, 201829, 201730, 201750, 201751, 201752]
+
+    weeks.forEach((w, i) => {
+      expect(u.epiweek.weekToEpiweek(w, seasonId)).to.equal(eweeks[i])
+    })
+  })
+
+  it('should be correct for edge cases', () => {
+    let seasonId = 2017
+    let weeks = [0.1, 1.2, 52, 53.3, 54.3]
+    let eweeks = [201752, 201801, 201752, 201801, 201802]
+
+    weeks.forEach((w, i) => {
+      expect(u.epiweek.weekToEpiweek(w, seasonId)).to.equal(eweeks[i])
+    })
+  })
+})
