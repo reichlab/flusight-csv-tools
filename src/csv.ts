@@ -5,7 +5,7 @@
 /**
  * Doc guard
  */
-import { Bin, RegionId, TargetId, Epiweek, SeasonId } from './interfaces'
+import { Bin, RegionId, TargetId, Epiweek, SeasonId, RegionTargetIndex } from './interfaces'
 import { targetFullName, regionFullName, targetType, regionIds, targetIds } from './meta'
 import * as u from './utils'
 import * as Papa from 'papaparse'
@@ -21,8 +21,8 @@ export default class CSV {
   readonly model: string
   readonly filePath: string
   headers: string[]
-  private bins: { [index: string]: { [index: string]: Bin[] } }
-  private points: { [index: string]: { [index: string]: number } }
+  private bins: RegionTargetIndex<Bin[]>
+  private points: RegionTargetIndex<number>
 
   /**
    * Initialize the csv with filename and some metadata

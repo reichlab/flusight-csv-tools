@@ -59,3 +59,11 @@ export type Score = {
   logScore: number,
   error: number
 }
+
+/**
+ * Generic type representing an object
+ * indexed by region and then target id
+ */
+export type RegionTargetIndex<T> = {
+  [index: string]: { [index: string]: T }
+}

@@ -10,7 +10,7 @@ import moize from 'moize'
 import * as truth from './truth'
 import * as u from './utils'
 import { regionIds, targetIds, targetType } from './meta'
-import { Score } from './interfaces'
+import { Score, RegionTargetIndex } from './interfaces'
 
 /**
  * Memoized version of getSeasonTruth since there will be a lot of
@@ -19,12 +19,33 @@ import { Score } from './interfaces'
 const getSeasonTruthMem = moize(truth.getSeasonTruth, { isPromise: true })
 
 /**
+ * Aggregate the scores by taking mean
+ */
+export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetIndex<Score> {
+  let scoreIds = ['logScore', 'error']
+  let meanScores: RegionTargetIndex<Score> = {}
+
+  for (let target of targetIds) {
+    meanScores[target] = {}
+    for (let region of regionIds) {
+      meanScores[target][region] = {} as Score
+      for (let scoreId of scoreIds) {
+        meanScores[target][region][scoreId] = scores.map(s => s[target][region][scoreId]).reduce((a, b) => a + b, 0)
+        meanScores[target][region][scoreId] /= scores.length
+      }
+    }
+  }
+
+  return meanScores
+}
+
+/**
  * Return scores for all the regions and targets in the csv
  */
-export async function score(csv: Csv): Promise<{ [index: string]: { [index: string]: Score } }> {
+export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
   let seasonTruth = await getSeasonTruthMem(csv.season)
 
-  let scores: { [index: string]: { [index: string]: Score } } = {}
+  let scores: RegionTargetIndex<Score> = {}
 
   for (let region of regionIds) {
     scores[region] = {}
