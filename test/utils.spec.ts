@@ -67,72 +67,65 @@ describe('binFor', () => {
 
     it('should work for normal cases', () => {
       let bins: Bin[] = [
-        [50, 51, 1],
-        [51, 52, 2],
-        [52, 53, 3]
+        [201450, 201451, 1],
+        [201451, 201452, 2],
+        [201452, 201453, 3]
       ]
 
-      expect(u.bins.binFor(bins, 50.5, target)[2]).to.equal(1)
-      expect(u.bins.binFor(bins, 51.9, target)[2]).to.equal(2)
+      expect(u.bins.binFor(bins, 201450, target)[2]).to.equal(1)
+      expect(u.bins.binFor(bins, 201451, target)[2]).to.equal(2)
     })
 
     it('should work for edge cases', () => {
       let bins: Bin[] = [
-        [50, 51, 1],
-        [51, 52, 2],
-        [52, 53, 3]
+        [201450, 201451, 1],
+        [201451, 201452, 2],
+        [201452, 201453, 3]
       ]
 
-      expect(u.bins.binFor(bins, 50, target)[2]).to.equal(1)
-      expect(u.bins.binFor(bins, 51, target)[2]).to.equal(2)
-      expect(u.bins.binFor(bins, 52, target)[2]).to.equal(3)
-      expect(() => u.bins.binFor(bins, 53, target)).to.throw('Bin value not found')
-      expect(() => u.bins.binFor(bins, 49, target)).to.throw('Bin value not found')
+      expect(u.bins.binFor(bins, 201450, target)[2]).to.equal(1)
+      expect(u.bins.binFor(bins, 201451, target)[2]).to.equal(2)
+      expect(u.bins.binFor(bins, 201452, target)[2]).to.equal(3)
+      expect(() => u.bins.binFor(bins, 201453, target)).to.throw('Bin value not found')
+      expect(() => u.bins.binFor(bins, 201449, target)).to.throw('Bin value not found')
     })
 
     it('should work for season edge cases', () => {
       // Regular season
       let bins: Bin[] = [
-        [50, 51, 1],
-        [51, 52, 2],
-        [52, 1, 3],
-        [1, 2, 4],
-        [2, 3, 5]
+        [201750, 201751, 1],
+        [201751, 201752, 2],
+        [201752, 201801, 3],
+        [201801, 201802, 4],
+        [201802, 201803, 5]
       ]
 
-      expect(u.bins.binFor(bins, 52, target)[2]).to.equal(3)
-      expect(u.bins.binFor(bins, 1, target)[2]).to.equal(4)
-      expect(u.bins.binFor(bins, 52.3, target)[2]).to.equal(3)
-      expect(u.bins.binFor(bins, 0.3, target)[2]).to.equal(3)
-      expect(() => u.bins.binFor(bins, 53, target)).to.throw('Bin value not found')
-      expect(() => u.bins.binFor(bins, 53.3, target)).to.throw('Bin value not found')
+      expect(u.bins.binFor(bins, 201752, target)[2]).to.equal(3)
+      expect(u.bins.binFor(bins, 201801, target)[2]).to.equal(4)
+      expect(() => u.bins.binFor(bins, 201753, target)).to.throw('Bin value not found')
 
       // 53 week season
       bins = [
-        [50, 51, 1],
-        [51, 52, 2],
-        [52, 53, 3],
-        [53, 1, 4],
-        [1, 2, 5],
-        [2, 3, 6]
+        [201450, 201451, 1],
+        [201451, 201452, 2],
+        [201452, 201453, 3],
+        [201453, 201501, 4],
+        [201501, 201502, 5],
+        [201502, 201503, 6]
       ]
 
-      expect(u.bins.binFor(bins, 52, target)[2]).to.equal(3)
-      expect(u.bins.binFor(bins, 53, target)[2]).to.equal(4)
-      expect(u.bins.binFor(bins, 1, target)[2]).to.equal(5)
-      expect(u.bins.binFor(bins, 52.3, target)[2]).to.equal(3)
-      expect(u.bins.binFor(bins, 53.3, target)[2]).to.equal(4)
-      expect(u.bins.binFor(bins, 0.3, target)[2]).to.equal(4)
-      expect(() => u.bins.binFor(bins, 54, target)).to.throw('Bin value not found')
-      expect(() => u.bins.binFor(bins, 54.3, target)).to.throw('Bin value not found')
+      expect(u.bins.binFor(bins, 201452, target)[2]).to.equal(3)
+      expect(u.bins.binFor(bins, 201453, target)[2]).to.equal(4)
+      expect(u.bins.binFor(bins, 201501, target)[2]).to.equal(5)
+      expect(() => u.bins.binFor(bins, 201454, target)).to.throw('Bin value not found')
     })
 
     it('should work for onsets', () => {
       // Onset bin at standard position
       let bins: Bin[] = [
-        [50, 51, 1],
-        [51, 52, 2],
-        [52, 53, 3],
+        [201450, 201451, 1],
+        [201451, 201452, 2],
+        [201452, 201453, 3],
         [null, null, 4]
       ]
       let target: TargetId = 'onset-wk'
@@ -141,10 +134,10 @@ describe('binFor', () => {
 
       // Onset at non standard position
       bins = [
-        [50, 51, 1],
-        [51, 52, 2],
+        [201450, 201451, 1],
+        [201451, 201452, 2],
         [null, null, 3],
-        [52, 53, 4]
+        [201452, 201453, 4]
       ]
       expect(() => u.bins.binFor(bins, null, target)).to.throw('Bin value not found')
     })

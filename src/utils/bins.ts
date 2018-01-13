@@ -1,7 +1,7 @@
 // Module for working with Bins
 
 import * as almostEqual from 'almost-equal'
-import { Bin, TargetId } from '../interfaces'
+import { Epiweek, Bin, TargetId } from '../interfaces'
 import { targetType } from '../meta'
 import { isInCache } from './cache';
 
@@ -44,50 +44,17 @@ export function sliceSumBins(bins: Bin[], batch: number): Bin[] {
 }
 
 /**
- * Compare plain percent values
- */
-function comparePercents(a: number, b: number): number {
-  return a - b
-}
-/**
- * Compare bins of percent type (week ahead and peak bins)
- */
-function comparePercentBins(a: Bin, b: Bin): number {
-  return comparePercents(a[0], b[0])
-}
-
-/**
- * Compare week values
- */
-function compareWeeks(a: number, b: number): number {
-  if ((a >= 30) && (b < 30)) {
-    return -1
-  } else if ((a < 30) && (b >= 30)) {
-    return 1
-  } else {
-    return a - b
-  }
-}
-
-/**
- * Compare bins of week type (onset-wk and peak-wk)
- */
-function compareWeekBins(a: Bin, b: Bin): number {
-  return compareWeeks(a[0], b[0])
-}
-
-/**
  * Sort bins appropriately using the target information
  */
 export function sortBins(bins: Bin[], target: TargetId): Bin[] {
   // Extract none value separately and push it in the end
   let noneVal = null
   if (target === 'onset-wk') {
-    let noneIdx = bins.findIndex(b => b[0].toString() === 'none')
+    let noneIdx = bins.findIndex(b => b[0] === null)
     noneVal = bins[noneIdx][2]
     bins.splice(noneIdx, 1)
   }
-  bins = bins.sort(targetType[target] === 'percent' ? comparePercentBins : compareWeekBins)
+  bins = bins.sort((a, b) => a[0] - b[0])
   if (noneVal !== null) bins.push([null, null, noneVal])
   return bins
 }
@@ -100,14 +67,8 @@ export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
   let tolerance = 0.000000001
   let binType = targetType[target]
   let notFoundError = new Error('Bin value not found')
-  let comparator
 
-  // Setup comparator function
-  if (binType === 'percent') {
-    comparator = comparePercents
-  } else if (binType === 'week') {
-    comparator = compareWeeks
-
+  if (binType === 'week') {
     // We are looking for none bin of onset
     if (value === null) {
       if (bins[bins.length - 1][0] === null) {
@@ -117,35 +78,37 @@ export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
       }
     }
 
-    // Work only with ints for weeks
+    // Truncating tail if it gets in somehow
     value = Math.floor(value)
 
-    let nWeeks = Math.max(...bins.filter(b => b).map(b => b[0]))
-    if (value === 0) {
-      // If we have 0, use the last week of season's first year instead
-      value = nWeeks
-    } else if (value > nWeeks) {
+    // For week case, we just need to search the bin starts
+    let bin = bins.find(b => almostEqual(b[0], value, tolerance))
+
+    if (bin) {
+      return bin
+    } else {
       throw notFoundError
     }
-  }
 
-  // Find bin range for rejecting values
-  let binMin = bins[0][0]
-  let binMax = (bins[bins.length - 1][0] === null) ? bins[bins.length - 2][1] : bins[bins.length - 1][1]
+  } else if (binType === 'percent') {
+    // Find bin range for rejecting values
+    let binMin = bins[0][0]
+    let binMax = (bins[bins.length - 1][0] === null) ? bins[bins.length - 2][1] : bins[bins.length - 1][1]
 
-  if ((comparator(value, binMin - tolerance) < 0)
-      || (comparator(value, binMax + tolerance) > 0)) {
-    throw notFoundError
-  }
+    if (((value - (binMin - tolerance)) < 0)
+        || ((value - (binMax + tolerance)) > 0)) {
+      throw notFoundError
+    }
 
-  for (let bin of bins) {
-    if (almostEqual(bin[1], value, tolerance)) {
-      // Its the next bin
-      continue
-    } else {
-      if ((comparator(bin[1], (value - tolerance)) > 0)
-          || (almostEqual(bin[1], (value - tolerance), tolerance))) {
-        return bin
+    for (let bin of bins) {
+      if (almostEqual(bin[1], value, tolerance)) {
+        // Its the next bin
+        continue
+      } else {
+        if (((bin[1] - (value - tolerance)) > 0)
+            || (almostEqual(bin[1], (value - tolerance), tolerance))) {
+          return bin
+        }
       }
     }
   }

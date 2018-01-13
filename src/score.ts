@@ -15,8 +15,7 @@ const getSeasonTruthMem = memoize(truth.getSeasonTruth)
  * Return scores for all the regions and targets in the csv
  */
 export async function score(csv: Csv): Promise<{ [index: string]: { [index: string]: Score } }> {
-  let season = u.epiweek.seasonFromEpiweek(csv.epiweek)
-  let seasonTruth = await getSeasonTruthMem(season)
+  let seasonTruth = await getSeasonTruthMem(csv.season)
 
   let scores: { [index: string]: { [index: string]: Score } } = {}
 
@@ -34,7 +33,7 @@ export async function score(csv: Csv): Promise<{ [index: string]: { [index: stri
         let pointEstimate = csv.getPoint(target, region)
         let error
 
-        let trueProbability = u.bins.binFor(csv.getBins(target, region), trueValue % 100, target)[2]
+        let trueProbability = u.bins.binFor(csv.getBins(target, region), trueValue, target)[2]
         let logScore = trueProbability !== null ? Math.log(trueProbability) : null
 
         if (targetType[target] === 'percent') {

@@ -7,8 +7,7 @@ import * as moment from 'moment'
  */
 export function weekToEpiweek(week: number, seasonId: SeasonId): Epiweek {
   // If null, return it directly since that might refer to None onset week
-  // Note that although the CSVs will have 'NA' for None, we parse that to a null
-  if (week === null) return null
+  if (week === null || week.toString() === 'none') return null
 
   // Convert the point predictions to int first
   week = Math.floor(week)

@@ -1,4 +1,4 @@
-import { Bin, RegionId, TargetId, Epiweek } from './interfaces'
+import { Bin, RegionId, TargetId, Epiweek, SeasonId } from './interfaces'
 import { targetFullName, regionFullName, targetType, regionIds, targetIds } from './meta'
 import * as u from './utils'
 import * as Papa from 'papaparse'
@@ -10,6 +10,7 @@ import * as fs from 'fs-extra'
  */
 export default class CSV {
   readonly epiweek: Epiweek
+  readonly season: SeasonId
   readonly model: string
   readonly filePath: string
   headers: string[]
@@ -23,12 +24,19 @@ export default class CSV {
     this.filePath = filePath
     this.epiweek = epiweek
     this.model = model
+    this.season = u.epiweek.seasonFromEpiweek(epiweek)
     this.parseCsv()
   }
 
   /**
+   * Convert week to epiweek using this csv's season
+   */
+  private weekToEpiweek(week: number): Epiweek {
+    return u.epiweek.weekToEpiweek(week, this.season)
+  }
+
+  /**
    * Parse and read the csv
-   * TODO: Standardize bins before saving
    */
   private parseCsv() {
     let csvRows = Papa.parse(fs.readFileSync(this.filePath, 'utf8'), {
@@ -55,6 +63,12 @@ export default class CSV {
         let bins = csvData[regionFullName[region]][targetFullName[target]]
           .filter(row => row[2] == 'Bin')
           .map(row => [row[4], row[5], row[6]]) // bin start, bin end, value
+
+        if (targetType[target] === 'week') {
+          // Convert the week values in bins to epiweek
+          bins = bins.map(b => [this.weekToEpiweek(b[0]), this.weekToEpiweek(b[1]), b[2]])
+        }
+
         this.bins[region][target] = u.bins.sortBins(bins, target)
       }
     }
@@ -81,6 +95,10 @@ export default class CSV {
           point = u.bins.inferPoint(this.getBins(target, region))
         }
 
+        if (targetType[target] === 'week') {
+          // Transform the week target to epiweek
+          point = this.weekToEpiweek(point)
+        }
         this.points[region][target] = point
       }
     }
