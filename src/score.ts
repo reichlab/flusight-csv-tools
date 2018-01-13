@@ -6,7 +6,7 @@
  * Doc guard
  */
 import Csv from './csv'
-import * as memoize from 'fast-memoize'
+import moize from 'moize'
 import * as truth from './truth'
 import * as u from './utils'
 import { regionIds, targetIds, targetType } from './meta'
@@ -16,7 +16,7 @@ import { Score } from './interfaces'
  * Memoized version of getSeasonTruth since there will be a lot of
  * csvs with the same season
  */
-const getSeasonTruthMem = memoize(truth.getSeasonTruth)
+const getSeasonTruthMem = moize(truth.getSeasonTruth, { isPromise: true })
 
 /**
  * Return scores for all the regions and targets in the csv
