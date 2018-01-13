@@ -170,12 +170,24 @@ function parseWeekAhead(ewPairs: EpiweekWili[], startAt: Epiweek, nAhead: number
  */
 export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string]: { [index: string]: number }[] }> {
   let seasonData = await getSeasonData(season)
+
+  // If we need truth for a past season, we also need to collect data for the
+  // one season ahead to account for the week head values for the last few weeks
+  // This is mosty probably not going to be costly, so we collect the whole next
+  // season data and jam it to the current season
+  let nextSeasonData
+  if (seasonData && (season < u.epiweek.currentSeasonId())) {
+    nextSeasonData = await getSeasonData(season + 1)
+  }
+
   let allEpiweeks = u.epiweek.seasonEpiweeks(season)
 
   let truth: { [index: string]: { [index: string]: number }[] } = {}
 
   for (let region of regionIds) {
     let regionSub = seasonData ? seasonData[region] : []
+    let regionSubExtension = nextSeasonData ? nextSeasonData[region] : []
+
     truth[region] = []
 
     // Find truth for seasonal targets
@@ -186,10 +198,10 @@ export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string
     for (let epiweek of allEpiweeks) {
       truth[region].push({
         epiweek,
-        '1-ahead': parseWeekAhead(regionSub, epiweek, 1),
-        '2-ahead': parseWeekAhead(regionSub, epiweek, 2),
-        '3-ahead': parseWeekAhead(regionSub, epiweek, 3),
-        '4-ahead': parseWeekAhead(regionSub, epiweek, 4),
+        '1-ahead': parseWeekAhead(regionSub.concat(regionSubExtension), epiweek, 1),
+        '2-ahead': parseWeekAhead(regionSub.concat(regionSubExtension), epiweek, 2),
+        '3-ahead': parseWeekAhead(regionSub.concat(regionSubExtension), epiweek, 3),
+        '4-ahead': parseWeekAhead(regionSub.concat(regionSubExtension), epiweek, 4),
         'onset-wk': regionOnset,
         ...regionPeak
       })
