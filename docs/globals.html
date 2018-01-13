@@ -918,8 +918,8 @@ img { max-width: 100%; }
 			<p><a href="https://travis-ci.org/reichlab/flusight-csv-tools"><img src="https://img.shields.io/travis/reichlab/flusight-csv-tools/master.svg?style=flat-square" alt="Build Status"></a>
 				<a href="https://www.npmjs.com/package/flusight-csv-tools"><img src="https://img.shields.io/npm/v/flusight-csv-tools.svg?style=flat-square" alt="npm"></a>
 			<a href="https://www.npmjs.com/package/flusight-csv-tools"><img src="https://img.shields.io/npm/l/flusight-csv-tools.svg?style=flat-square" alt="npm"></a></p>
-			<p>Node toolkit for CDC FluSight format CSVs. Provides features for:</p>
 			<p><em>This is a work in progress as of now.</em></p>
+			<p>Node toolkit for CDC FluSight format CSVs. Provides features for:</p>
 			<pre><code class="lang-js"><span class="hljs-keyword">const</span> fct = <span class="hljs-built_in">require</span>(<span class="hljs-string">'flusight-csv-tools'</span>)
 </code></pre>
 			<ol>
@@ -927,8 +927,12 @@ img { max-width: 100%; }
 				<li>Verifying CSVs (<code>fct.verify</code> module)</li>
 				<li>Scoring targets (<code>fct.score</code> module)</li>
 				<li>Fetching true values (<code>fct.truth</code> module)</li>
-				<li>Tools for working with bin distributions (<code>fct.binUtils</code> module)</li>
-				<li>Other metadata related to CDC FluSight (<code>fct.meta</code> module)</li>
+				<li>Metadata related to CDC FluSight (<code>fct.meta</code> module)</li>
+				<li>Utilities for working with<ul>
+						<li>Bin distributions (<code>fct.utils.bins</code> module)</li>
+						<li>Time and epiweeks (<code>fct.utils.epiweek</code> module)</li>
+					</ul>
+				</li>
 			</ol>
 		</div>
 		<section class="tsd-panel-group tsd-index-group">
@@ -938,7 +942,6 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>External modules</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-external-module"><a href="modules/_bin_utils_.html" class="tsd-kind-icon">"bin-<wbr>utils"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_csv_.html" class="tsd-kind-icon">"csv"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_delphi_.html" class="tsd-kind-icon">"delphi"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_index_.html" class="tsd-kind-icon">"index"</a></li>
@@ -946,6 +949,10 @@ img { max-width: 100%; }
 							<li class="tsd-kind-external-module"><a href="modules/_meta_.html" class="tsd-kind-icon">"meta"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_score_.html" class="tsd-kind-icon">"score"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_truth_.html" class="tsd-kind-icon">"truth"</a></li>
+							<li class="tsd-kind-external-module"><a href="modules/_utils_bins_.html" class="tsd-kind-icon">"utils/bins"</a></li>
+							<li class="tsd-kind-external-module"><a href="modules/_utils_cache_.html" class="tsd-kind-icon">"utils/cache"</a></li>
+							<li class="tsd-kind-external-module"><a href="modules/_utils_epiweek_.html" class="tsd-kind-icon">"utils/epiweek"</a></li>
+							<li class="tsd-kind-external-module"><a href="modules/_utils_index_.html" class="tsd-kind-icon">"utils/index"</a></li>
 							<li class="tsd-kind-external-module"><a href="modules/_verify_.html" class="tsd-kind-icon">"verify"</a></li>
 						</ul>
 					</section>

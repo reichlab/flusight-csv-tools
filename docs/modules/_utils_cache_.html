@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;score&quot; | flusight-csv-tools</title>
+	<title>&quot;utils/cache&quot; | flusight-csv-tools</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -910,10 +910,22 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-			<a href="_score_.html#getseasontruthmem" class="tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem</a>
+			<a href="_utils_cache_.html#cache_dir" class="tsd-kind-icon">CACHE_<wbr>DIR</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module">
-			<a href="_score_.html#score" class="tsd-kind-icon">score</a>
+			<a href="_utils_cache_.html#isincache" class="tsd-kind-icon">is<wbr>InCache</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+			<a href="_utils_cache_.html#readcsv" class="tsd-kind-icon">read<wbr>Csv</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_cache_.html#readfromcache" class="tsd-kind-icon">read<wbr>From<wbr>Cache</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+			<a href="_utils_cache_.html#readjson" class="tsd-kind-icon">readJSON</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_cache_.html#writeincache" class="tsd-kind-icon">write<wbr>InCache</a>
 		</li>
 	</ul>
 </nav>
@@ -922,7 +934,7 @@ img { max-width: 100%; }
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p>Module for scoring related functions</p>
+					<p>Module with functions related to flusight-csv-tools cache</p>
 				</div>
 			</div>
 		</section>
@@ -933,13 +945,17 @@ img { max-width: 100%; }
 					<section class="tsd-index-section tsd-is-not-exported">
 						<h3>Variables</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_score_.html#getseasontruthmem" class="tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem</a></li>
+							<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_utils_cache_.html#cache_dir" class="tsd-kind-icon">CACHE_<wbr>DIR</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_score_.html#score" class="tsd-kind-icon">score</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_cache_.html#isincache" class="tsd-kind-icon">is<wbr>InCache</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_utils_cache_.html#readcsv" class="tsd-kind-icon">read<wbr>Csv</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_cache_.html#readfromcache" class="tsd-kind-icon">read<wbr>From<wbr>Cache</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_utils_cache_.html#readjson" class="tsd-kind-icon">readJSON</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_cache_.html#writeincache" class="tsd-kind-icon">write<wbr>InCache</a></li>
 						</ul>
 					</section>
 				</div>
@@ -948,18 +964,17 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 			<h2>Variables</h2>
 			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-				<a name="getseasontruthmem" class="tsd-anchor"></a>
-				<h3>get<wbr>Season<wbr>Truth<wbr>Mem</h3>
-				<div class="tsd-signature tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;memoize(truth.getSeasonTruth)</span></div>
+				<a name="cache_dir" class="tsd-anchor"></a>
+				<h3>CACHE_<wbr>DIR</h3>
+				<div class="tsd-signature tsd-kind-icon">CACHE_<wbr>DIR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;path.join(userCacheDir(), &#x27;flusight-csv-tools&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/score.ts#L19">score.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/cache.ts#L16">utils/cache.ts:16</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Memoized version of getSeasonTruth since there will be a lot of
-						csvs with the same season</p>
+						<p>Cache directory path</p>
 					</div>
 				</div>
 			</section>
@@ -967,30 +982,145 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-				<a name="score" class="tsd-anchor"></a>
-				<h3>score</h3>
+				<a name="isincache" class="tsd-anchor"></a>
+				<h3>is<wbr>InCache</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-					<li class="tsd-signature tsd-kind-icon">score<span class="tsd-signature-symbol">(</span>csv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Csv</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">is<wbr>InCache<span class="tsd-signature-symbol">(</span>cacheFile<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/score.ts#L24">score.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/cache.ts#L21">utils/cache.ts:21</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Return scores for all the regions and targets in the csv</p>
+								<p>Tell if the file is present in cache</p>
 							</div>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>csv: <span class="tsd-signature-type">Csv</span></h5>
+								<h5>cacheFile: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+				<a name="readcsv" class="tsd-anchor"></a>
+				<h3>read<wbr>Csv</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<li class="tsd-signature tsd-kind-icon">read<wbr>Csv<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/cache.ts#L29">utils/cache.ts:29</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Read csv using papaparse</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>filePath: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="readfromcache" class="tsd-anchor"></a>
+				<h3>read<wbr>From<wbr>Cache</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">read<wbr>From<wbr>Cache<span class="tsd-signature-symbol">(</span>cacheFile<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/cache.ts#L45">utils/cache.ts:45</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return data read from cache for the given filename</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>cacheFile: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+				<a name="readjson" class="tsd-anchor"></a>
+				<h3>readJSON</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<li class="tsd-signature tsd-kind-icon">readJSON<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/cache.ts#L38">utils/cache.ts:38</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Read json from file</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>filePath: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="writeincache" class="tsd-anchor"></a>
+				<h3>write<wbr>InCache</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">write<wbr>InCache<span class="tsd-signature-symbol">(</span>cacheFile<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/cache.ts#L59">utils/cache.ts:59</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Write the provided data in cacheFile</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>cacheFile: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>data: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>

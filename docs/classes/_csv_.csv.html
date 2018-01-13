@@ -916,9 +916,6 @@ img { max-width: 100%; }
 					<a href="_csv_.csv.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="_csv_.csv.html#data" class="tsd-kind-icon">data</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="_csv_.csv.html#epiweek" class="tsd-kind-icon">epiweek</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -929,6 +926,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="_csv_.csv.html#model" class="tsd-kind-icon">model</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="_csv_.csv.html#season" class="tsd-kind-icon">season</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_csv_.csv.html#getbins" class="tsd-kind-icon">get<wbr>Bins</a>
@@ -973,11 +973,11 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_csv_.csv.html#data" class="tsd-kind-icon">data</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_csv_.csv.html#epiweek" class="tsd-kind-icon">epiweek</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_csv_.csv.html#filepath" class="tsd-kind-icon">file<wbr>Path</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_csv_.csv.html#headers" class="tsd-kind-icon">headers</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_csv_.csv.html#model" class="tsd-kind-icon">model</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_csv_.csv.html#season" class="tsd-kind-icon">season</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1003,7 +1003,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L15">csv.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L25">csv.ts:25</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1031,22 +1031,12 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="data" class="tsd-anchor"></a>
-				<h3>data</h3>
-				<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L15">csv.ts:15</a></li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="epiweek" class="tsd-anchor"></a>
 				<h3>epiweek</h3>
 				<div class="tsd-signature tsd-kind-icon">epiweek<span class="tsd-signature-symbol">:</span> <a href="../modules/_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L11">csv.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L19">csv.ts:19</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1056,7 +1046,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">file<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L13">csv.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L22">csv.ts:22</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1066,7 +1056,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L14">csv.ts:14</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L23">csv.ts:23</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1076,7 +1066,17 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L12">csv.ts:12</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L21">csv.ts:21</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="season" class="tsd-anchor"></a>
+				<h3>season</h3>
+				<div class="tsd-signature tsd-kind-icon">season<span class="tsd-signature-symbol">:</span> <a href="../modules/_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L20">csv.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1093,7 +1093,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L56">csv.ts:56</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L87">csv.ts:87</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1124,7 +1124,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L84">csv.ts:84</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L124">csv.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1158,15 +1158,12 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/307babc/src/csv.ts#L48">csv.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/csv.ts#L117">csv.ts:117</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Return a point value for given target and region. The value is taken
-									directly from the csv without trying to infer it from bins. The verification
-									module takes care of checking where the provided point value matches with the
-								inferred value.</p>
+								<p>Return a point value for given target and region</p>
 							</div>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>

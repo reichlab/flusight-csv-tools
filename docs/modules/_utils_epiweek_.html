@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;score&quot; | flusight-csv-tools</title>
+	<title>&quot;utils/epiweek&quot; | flusight-csv-tools</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -909,11 +909,26 @@ img { max-width: 100%; }
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-			<a href="_score_.html#getseasontruthmem" class="tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem</a>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_epiweek_.html#currentepiweek" class="tsd-kind-icon">current<wbr>Epiweek</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module">
-			<a href="_score_.html#score" class="tsd-kind-icon">score</a>
+			<a href="_utils_epiweek_.html#currentseasonid" class="tsd-kind-icon">current<wbr>Season<wbr>Id</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_epiweek_.html#epiweekwithdiff" class="tsd-kind-icon">epiweek<wbr>With<wbr>Diff</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_epiweek_.html#getepiweekdiff" class="tsd-kind-icon">get<wbr>Epiweek<wbr>Diff</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_epiweek_.html#seasonepiweeks" class="tsd-kind-icon">season<wbr>Epiweeks</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_epiweek_.html#seasonfromepiweek" class="tsd-kind-icon">season<wbr>From<wbr>Epiweek</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_epiweek_.html#weektoepiweek" class="tsd-kind-icon">week<wbr>ToEpiweek</a>
 		</li>
 	</ul>
 </nav>
@@ -922,7 +937,7 @@ img { max-width: 100%; }
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p>Module for scoring related functions</p>
+					<p>Epiweek and time related functions</p>
 				</div>
 			</div>
 		</section>
@@ -930,67 +945,214 @@ img { max-width: 100%; }
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
-					<section class="tsd-index-section tsd-is-not-exported">
-						<h3>Variables</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_score_.html#getseasontruthmem" class="tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem</a></li>
-						</ul>
-					</section>
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_score_.html#score" class="tsd-kind-icon">score</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#currentepiweek" class="tsd-kind-icon">current<wbr>Epiweek</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#currentseasonid" class="tsd-kind-icon">current<wbr>Season<wbr>Id</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#epiweekwithdiff" class="tsd-kind-icon">epiweek<wbr>With<wbr>Diff</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#getepiweekdiff" class="tsd-kind-icon">get<wbr>Epiweek<wbr>Diff</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#seasonepiweeks" class="tsd-kind-icon">season<wbr>Epiweeks</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#seasonfromepiweek" class="tsd-kind-icon">season<wbr>From<wbr>Epiweek</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_epiweek_.html#weektoepiweek" class="tsd-kind-icon">week<wbr>ToEpiweek</a></li>
 						</ul>
 					</section>
-				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-			<h2>Variables</h2>
-			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-				<a name="getseasontruthmem" class="tsd-anchor"></a>
-				<h3>get<wbr>Season<wbr>Truth<wbr>Mem</h3>
-				<div class="tsd-signature tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;memoize(truth.getSeasonTruth)</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/score.ts#L19">score.ts:19</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Memoized version of getSeasonTruth since there will be a lot of
-						csvs with the same season</p>
-					</div>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-				<a name="score" class="tsd-anchor"></a>
-				<h3>score</h3>
+				<a name="currentepiweek" class="tsd-anchor"></a>
+				<h3>current<wbr>Epiweek</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-					<li class="tsd-signature tsd-kind-icon">score<span class="tsd-signature-symbol">(</span>csv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Csv</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">current<wbr>Epiweek<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/score.ts#L24">score.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L42">utils/epiweek.ts:42</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Return scores for all the regions and targets in the csv</p>
+								<p>Return current epiweek</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="currentseasonid" class="tsd-anchor"></a>
+				<h3>current<wbr>Season<wbr>Id</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">current<wbr>Season<wbr>Id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L83">utils/epiweek.ts:83</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return id for current season</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="epiweekwithdiff" class="tsd-anchor"></a>
+				<h3>epiweek<wbr>With<wbr>Diff</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">epiweek<wbr>With<wbr>Diff<span class="tsd-signature-symbol">(</span>epiweek<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a>, diff<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L60">utils/epiweek.ts:60</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return epiweek with diff number of weeks added</p>
 							</div>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>csv: <span class="tsd-signature-type">Csv</span></h5>
+								<h5>epiweek: <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h5>
+							</li>
+							<li>
+								<h5>diff: <span class="tsd-signature-type">number</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="getepiweekdiff" class="tsd-anchor"></a>
+				<h3>get<wbr>Epiweek<wbr>Diff</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Epiweek<wbr>Diff<span class="tsd-signature-symbol">(</span>first<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a>, second<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L70">utils/epiweek.ts:70</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return equivalent of first - second in epiweek scale</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>first: <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h5>
+							</li>
+							<li>
+								<h5>second: <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="seasonepiweeks" class="tsd-anchor"></a>
+				<h3>season<wbr>Epiweeks</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">season<wbr>Epiweeks<span class="tsd-signature-symbol">(</span>season<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a><span class="tsd-signature-symbol">[]</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L90">utils/epiweek.ts:90</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return a list of epiweeks in the season provided</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>season: <a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a><span class="tsd-signature-symbol">[]</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="seasonfromepiweek" class="tsd-anchor"></a>
+				<h3>season<wbr>From<wbr>Epiweek</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">season<wbr>From<wbr>Epiweek<span class="tsd-signature-symbol">(</span>epiweek<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L52">utils/epiweek.ts:52</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return seasons for given epiweek. Assume seasons start from
+								mmwr-week 30 and end on next year&#39;s week 29</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>epiweek: <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="weektoepiweek" class="tsd-anchor"></a>
+				<h3>week<wbr>ToEpiweek</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">week<wbr>ToEpiweek<span class="tsd-signature-symbol">(</span>week<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, seasonId<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/utils/epiweek.ts#L15">utils/epiweek.ts:15</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Convert given week and season to epiweek, handle non standard values too</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>week: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>seasonId: <a href="_interfaces_.html#seasonid" class="tsd-signature-type">SeasonId</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#epiweek" class="tsd-signature-type">Epiweek</a></h4>
 					</li>
 				</ul>
 			</section>
