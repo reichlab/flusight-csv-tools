@@ -47,3 +47,13 @@ export type EpiweekWiliLag = {
     wili: number
   }[]
 }
+
+/**
+ * A unit representing various scores
+ * `logScore` is single bin log score
+ * `error` is true value - estimated value
+ */
+export type Score = {
+  logScore: number,
+  error: number
+}
