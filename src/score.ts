@@ -77,7 +77,20 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
         if (targetType[target] === 'percent') {
           error = pointEstimate !== null ? trueValue - pointEstimate : null
         } else if (targetType[target] === 'week') {
-          error = pointEstimate !== null ? u.epiweek.getEpiweekDiff(trueValue, pointEstimate) : null
+          if (trueValue === null) {
+            // This is onset target with none bin as the truth
+            if (pointEstimate === null) {
+              error = 0
+            } else {
+              error = -Infinity
+            }
+          } else {
+            if (pointEstimate === null) {
+              error = -Infinity
+            } else {
+              error = u.epiweek.getEpiweekDiff(trueValue, pointEstimate)
+            }
+          }
         }
 
         scores[region][target] = { logScore, error, absError: Math.abs(error) }

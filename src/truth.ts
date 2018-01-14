@@ -8,7 +8,6 @@
 import { SeasonId, RegionId, TargetId, Epiweek, EpiweekWili, EpiweekWiliLag } from './interfaces'
 import { targetIds, regionIds, regionFullName } from './meta'
 import * as delphi from './delphi'
-import * as mmwr from 'mmwr-week'
 import * as moment from 'moment'
 import * as download from 'download'
 import * as arrayEqual from 'array-equal'
