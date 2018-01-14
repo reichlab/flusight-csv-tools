@@ -25,13 +25,13 @@ export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetInd
   let scoreIds = ['logScore', 'error']
   let meanScores: RegionTargetIndex<Score> = {}
 
-  for (let target of targetIds) {
-    meanScores[target] = {}
-    for (let region of regionIds) {
-      meanScores[target][region] = {} as Score
+  for (let region of regionIds) {
+    meanScores[region] = {}
+    for (let target of targetIds) {
+      meanScores[region][target] = {} as Score
       for (let scoreId of scoreIds) {
-        meanScores[target][region][scoreId] = scores.map(s => s[target][region][scoreId]).reduce((a, b) => a + b, 0)
-        meanScores[target][region][scoreId] /= scores.length
+        meanScores[region][target][scoreId] = scores.map(s => s[region][target][scoreId]).reduce((a, b) => a + b, 0)
+        meanScores[region][target][scoreId] /= scores.length
       }
     }
   }
