@@ -81,7 +81,6 @@ describe('Scores', () => {
     }
 
     let scores = await Promise.all([score.score(csv), score.score(csv2)])
-    console.log(scores)
     let aggregatedScore = score.meanScores(scores)
     expect(scoresEqual(expectedScore.nat, aggregatedScore.nat)).to.be.true
   }).timeout(0)
