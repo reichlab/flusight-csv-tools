@@ -14,7 +14,10 @@ import * as moment from 'moment'
  */
 export function weekToEpiweek(week: number, seasonId: SeasonId): Epiweek {
   // If null, return it directly since that might refer to None onset week
-  if (week === null || week.toString() === 'none') return null
+  if (week === null ||
+      week === undefined ||
+      isNaN(week) ||
+      week.toString() === 'none') return null
 
   // Convert the point predictions to int first
   week = Math.floor(week)
