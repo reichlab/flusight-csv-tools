@@ -9,7 +9,7 @@ import Csv from './csv'
 import moize from 'moize'
 import * as truth from './truth'
 import * as u from './utils'
-import { regionIds, targetIds, targetType } from './meta'
+import { regionIds, targetIds, scoreIds, targetType } from './meta'
 import { Score, RegionTargetIndex } from './interfaces'
 
 /**
@@ -22,7 +22,6 @@ const getSeasonTruthMem = moize(truth.getSeasonTruth, { isPromise: true })
  * Aggregate the scores by taking mean
  */
 export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetIndex<Score> {
-  let scoreIds = ['logScore', 'error']
   let meanScores: RegionTargetIndex<Score> = {}
 
   for (let region of regionIds) {
@@ -30,8 +29,14 @@ export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetInd
     for (let target of targetIds) {
       meanScores[region][target] = {} as Score
       for (let scoreId of scoreIds) {
-        meanScores[region][target][scoreId] = scores.map(s => s[region][target][scoreId]).reduce((a, b) => a + b, 0)
-        meanScores[region][target][scoreId] /= scores.length
+        if (scoreId === 'error') {
+          // Return null since mean of error is useless
+          meanScores[region][target][scoreId] = null
+        } else {
+          let scoreValues = scores.map(s => s[region][target][scoreId]).filter(s => s !== null)
+          meanScores[region][target][scoreId] = scoreValues.reduce((a, b) => a + b, 0)
+          meanScores[region][target][scoreId] /= scoreValues.length
+        }
       }
     }
   }
@@ -56,7 +61,7 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
 
       if ((target !== 'onset-wk') && (trueValue === null)) {
         // Only onset-wk can have null true value
-        scores[region][target] = { logScore: null, error: null }
+        scores[region][target] = { logScore: null, error: null, absError: null }
       } else {
         let pointEstimate = csv.getPoint(target, region)
         let error
@@ -70,7 +75,7 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
           error = pointEstimate !== null ? u.epiweek.getEpiweekDiff(trueValue, pointEstimate) : null
         }
 
-        scores[region][target] = { logScore, error }
+        scores[region][target] = { logScore, error, absError: Math.abs(error) }
       }
     }
   }

@@ -21,8 +21,7 @@ export const headers = [
 ]
 
 /**
- * Short ids representing a region. These are used as the
- * standard way of representing a region in the code.
+ * Short ids representing a region in the code.
  */
 export const regionIds: RegionId[] = [
   'nat',
@@ -39,8 +38,7 @@ export const regionIds: RegionId[] = [
 ]
 
 /**
- * Short ids representing a target. These are used as the
- * standard way of representing a target in the code.
+ * Short ids representing a target in the code.
  */
 export const targetIds: TargetId[] = [
   '1-ahead',
@@ -50,6 +48,15 @@ export const targetIds: TargetId[] = [
   'peak',
   'peak-wk',
   'onset-wk'
+]
+
+/**
+ * Short ids representing a score in the code.
+ */
+export const scoreIds: string[] = [
+  'logScore',
+  'error',
+  'absError'
 ]
 
 /**

@@ -1,5 +1,5 @@
 import { Csv, score } from '../src/'
-import { regionIds, targetIds } from '../src/meta'
+import { regionIds, targetIds, scoreIds } from '../src/meta'
 import { expect } from 'chai'
 import * as almostEqual from 'almost-equal'
 import 'mocha'
@@ -14,7 +14,7 @@ import { cache } from '../src/utils/index';
 function scoresEqual(scoreA: { [index: string]: Score },
                      scoreB: { [index: string]: Score }): boolean {
   for (let target of targetIds) {
-    for (let scoreId of ['logScore', 'error']) {
+    for (let scoreId of scoreIds) {
       if(!almostEqual(scoreA[target][scoreId], scoreB[target][scoreId])) {
         return false
       }
@@ -30,13 +30,13 @@ describe('Scores', () => {
 
     let expectedScore = {
       nat: {
-        '1-ahead': { logScore: -Infinity, error: -5.03411 },
-        '2-ahead': { logScore: -Infinity, error: -5.69074 },
-        '3-ahead': { logScore: -Infinity, error: -6.156090000000001 },
-        '4-ahead': { logScore: -Infinity, error: -6.294873 },
-        'peak': { logScore: -Infinity, error: -2.1390599999999997 },
-        'peak-wk': { logScore: -1.4086095021368603, error: 2 },
-        'onset-wk': { logScore: -Infinity, error: 1 }
+        '1-ahead': { logScore: -Infinity, error: -5.03411, absError: 5.03411 },
+        '2-ahead': { logScore: -Infinity, error: -5.69074, absError: 5.69074 },
+        '3-ahead': { logScore: -Infinity, error: -6.156090000000001, absError: 6.156090000000001 },
+        '4-ahead': { logScore: -Infinity, error: -6.294873, absError: 6.294873 },
+        'peak': { logScore: -Infinity, error: -2.1390599999999997, absError: 2.1390599999999997 },
+        'peak-wk': { logScore: -1.4086095021368603, error: 2, absError: 2 },
+        'onset-wk': { logScore: -Infinity, error: 1, absError: 1 }
       }
     }
 
@@ -49,13 +49,13 @@ describe('Scores', () => {
 
     let expectedScore = {
       nat: {
-        '1-ahead': { logScore: -1.4940521728850975, error: -0.11971539428982769 },
-        '2-ahead': { logScore: -1.4252846580598586, error: -0.09328083484576499 },
-        '3-ahead': { logScore: -1.712127901971514, error: -0.0827351841778543 },
-        '4-ahead': { logScore: -1.9755750256876092, error: -0.2033435882352843 },
-        'peak': { logScore: -0.7031219962300552, error: -0.039060000002438144 },
-        'peak-wk': { logScore: -0.8368084555740485, error: 1 },
-        'onset-wk': { logScore: -0.8979822612093167, error: 0 }
+        '1-ahead': { logScore: -1.4940521728850975, error: -0.11971539428982769, absError: 0.11971539428982769 },
+        '2-ahead': { logScore: -1.4252846580598586, error: -0.09328083484576499, absError: 0.09328083484576499 },
+        '3-ahead': { logScore: -1.712127901971514, error: -0.0827351841778543, absError: 0.0827351841778543 },
+        '4-ahead': { logScore: -1.9755750256876092, error: -0.2033435882352843, absError: 0.2033435882352843 },
+        'peak': { logScore: -0.7031219962300552, error: -0.039060000002438144, absError: 0.039060000002438144 },
+        'peak-wk': { logScore: -0.8368084555740485, error: 1, absError: 1 },
+        'onset-wk': { logScore: -0.8979822612093167, error: 0, absError: 0 }
       }
     }
 
@@ -70,13 +70,13 @@ describe('Scores', () => {
 
     let expectedScore = {
       nat: {
-        '1-ahead': { logScore: -Infinity, error: -2.576912697144914 },
-        '2-ahead': { logScore: -Infinity, error: -2.8920104174228825 },
-        '3-ahead': { logScore: -Infinity, error: -3.1194125920889277 },
-        '4-ahead': { logScore: -Infinity, error: -3.249108294117642 },
-        'peak': { logScore: -Infinity, error: -1.089060000001219 },
-        'peak-wk': { logScore: -1.1227089788554543, error: 1.5 },
-        'onset-wk': { logScore: -Infinity, error: 0.5 }
+        '1-ahead': { logScore: -Infinity, error: null, absError: 2.576912697144914 },
+        '2-ahead': { logScore: -Infinity, error: null, absError: 2.8920104174228825 },
+        '3-ahead': { logScore: -Infinity, error: null, absError: 3.1194125920889277 },
+        '4-ahead': { logScore: -Infinity, error: null, absError: 3.249108294117642 },
+        'peak': { logScore: -Infinity, error: null, absError: 1.089060000001219 },
+        'peak-wk': { logScore: -1.1227089788554543, error: null, absError: 1.5 },
+        'onset-wk': { logScore: -Infinity, error: null, absError: 0.5 }
       }
     }
 
