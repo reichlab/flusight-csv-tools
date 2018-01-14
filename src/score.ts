@@ -66,7 +66,12 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
         let pointEstimate = csv.getPoint(target, region)
         let error
 
-        let trueProbability = u.bins.binFor(csv.getBins(target, region), trueValue, target)[2]
+        let trueProbability = null
+        try {
+          trueProbability = u.bins.binFor(csv.getBins(target, region), trueValue, target)[2]
+        } catch (e) {
+          // Error in finding true bin, leaving probability as null
+        }
         let logScore = trueProbability !== null ? Math.log(trueProbability) : null
 
         if (targetType[target] === 'percent') {
