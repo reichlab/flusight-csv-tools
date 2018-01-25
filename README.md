@@ -7,10 +7,6 @@
 Node toolkit for CDC FluSight format CSVs. Full documentation
 [here](http://reichlab.io/flusight-csv-tools). Provides features for:
 
-```js
-const fct = require('flusight-csv-tools')
-```
-
 1. Parsing CSVs (`fct.Csv` class)
 2. Verifying CSVs (`fct.verify` module)
 3. Scoring targets (`fct.score` module)
@@ -19,8 +15,29 @@ const fct = require('flusight-csv-tools')
 6. Utilities for working with
    - Bin distributions (`fct.utils.bins` module)
    - Time and epiweeks (`fct.utils.epiweek` module)
+   
+## Quickstart
 
-### Data representation
+```bash
+# Install from npm
+npm i flusight-csv-tools
+```
+
+```js
+// Read a csv
+const fct = require('flusight-csv-tools')
+let csv = new fct.Csv('./test/data/sample.csv', 201720, 'model-name')
+
+// Verify
+fct.verify.verifyHeaders(csv)
+fct.verify.verifyPoint(csv)
+fct.verify.verifyProbabilities(csv)
+
+// Score
+fct.score.score(csv).then(d => ...)
+```
+
+## Data representation
 
 A CSV ingested by flusight-csv-tools uses the following standards for
 representing information:

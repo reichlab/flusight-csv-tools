@@ -920,8 +920,6 @@ img { max-width: 100%; }
 			<a href="https://www.npmjs.com/package/flusight-csv-tools"><img src="https://img.shields.io/npm/l/flusight-csv-tools.svg?style=flat-square" alt="npm"></a></p>
 			<p>Node toolkit for CDC FluSight format CSVs. Full documentation
 			<a href="http://reichlab.io/flusight-csv-tools">here</a>. Provides features for:</p>
-			<pre><code class="lang-js"><span class="hljs-keyword">const</span> fct = <span class="hljs-built_in">require</span>(<span class="hljs-string">'flusight-csv-tools'</span>)
-</code></pre>
 			<ol>
 				<li>Parsing CSVs (<code>fct.Csv</code> class)</li>
 				<li>Verifying CSVs (<code>fct.verify</code> module)</li>
@@ -934,7 +932,23 @@ img { max-width: 100%; }
 					</ul>
 				</li>
 			</ol>
-			<h3 id="data-representation">Data representation</h3>
+			<h2 id="quickstart">Quickstart</h2>
+			<pre><code class="lang-bash"><span class="hljs-comment"># Install from npm</span>
+npm i flusight-csv-tools
+</code></pre>
+			<pre><code class="lang-js"><span class="hljs-comment">// Read a csv</span>
+<span class="hljs-keyword">const</span> fct = <span class="hljs-built_in">require</span>(<span class="hljs-string">'flusight-csv-tools'</span>)
+<span class="hljs-keyword">let</span> csv = <span class="hljs-keyword">new</span> fct.Csv(<span class="hljs-string">'./test/data/sample.csv'</span>, <span class="hljs-number">201720</span>, <span class="hljs-string">'model-name'</span>)
+
+<span class="hljs-comment">// Verify</span>
+fct.verify.verifyHeaders(csv)
+fct.verify.verifyPoint(csv)
+fct.verify.verifyProbabilities(csv)
+
+<span class="hljs-comment">// Score</span>
+fct.score.score(csv).then(<span class="hljs-function"><span class="hljs-params">d</span> =&gt;</span> ...)
+</code></pre>
+			<h2 id="data-representation">Data representation</h2>
 			<p>A CSV ingested by flusight-csv-tools uses the following standards for
 			representing information:</p>
 			<ol>
