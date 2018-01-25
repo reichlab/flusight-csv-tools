@@ -4,7 +4,8 @@
 [![npm](https://img.shields.io/npm/v/flusight-csv-tools.svg?style=flat-square)](https://www.npmjs.com/package/flusight-csv-tools)
 [![npm](https://img.shields.io/npm/l/flusight-csv-tools.svg?style=flat-square)](https://www.npmjs.com/package/flusight-csv-tools)
 
-Node toolkit for CDC FluSight format CSVs. Provides features for:
+Node toolkit for CDC FluSight format CSVs. Full documentation
+[here](http://reichlab.io/flusight-csv-tools). Provides features for:
 
 ```js
 const fct = require('flusight-csv-tools')
@@ -19,4 +20,22 @@ const fct = require('flusight-csv-tools')
    - Bin distributions (`fct.utils.bins` module)
    - Time and epiweeks (`fct.utils.epiweek` module)
 
-Full documentation [here](http://reichlab.io/flusight-csv-tools)
+### Data representation
+
+A CSV ingested by flusight-csv-tools uses the following standards for
+representing information:
+
+1. HHS Regions are referred to as `nat` (for 'US National') or `hhs1`, `hhs2`...
+   for 'HHS Region 1', 'HHS Region 2' and so on.
+2. Week ahead targets are referred using `1-ahead`, `2-ahead`, `3-ahead` and
+   `4-ahead` while seasonal targets are `peak` (peak wili value), `peak-wk` and
+   `onset-wk`.
+3. A season 20xx-20yy is represented using a single number 20xx (the first year
+   of a season).
+4. Weeks values are not represented by themselves but are always passed around
+   as epiweeks like YYYYWW where YYYY is the year and WW is the week (MMWR
+   week).
+5. An epidemic season 20xx contains all weeks in the set [20xx30, 20yy29], where
+   20yy = 20xx + 1.
+6. CSVs are scored using the latest available data and do not, as of yet, use
+   the data available at the time the predictions were made.
