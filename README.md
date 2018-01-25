@@ -4,8 +4,6 @@
 [![npm](https://img.shields.io/npm/v/flusight-csv-tools.svg?style=flat-square)](https://www.npmjs.com/package/flusight-csv-tools)
 [![npm](https://img.shields.io/npm/l/flusight-csv-tools.svg?style=flat-square)](https://www.npmjs.com/package/flusight-csv-tools)
 
-_This is a work in progress as of now._
-
 Node toolkit for CDC FluSight format CSVs. Provides features for:
 
 ```js
@@ -20,3 +18,5 @@ const fct = require('flusight-csv-tools')
 6. Utilities for working with
    - Bin distributions (`fct.utils.bins` module)
    - Time and epiweeks (`fct.utils.epiweek` module)
+
+Full documentation [here](http://reichlab.io/flusight-csv-tools)

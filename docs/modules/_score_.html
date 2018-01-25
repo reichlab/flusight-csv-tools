@@ -913,6 +913,9 @@ img { max-width: 100%; }
 			<a href="_score_.html#getseasontruthmem" class="tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_score_.html#meanscores" class="tsd-kind-icon">mean<wbr>Scores</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
 			<a href="_score_.html#score" class="tsd-kind-icon">score</a>
 		</li>
 	</ul>
@@ -939,6 +942,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_score_.html#meanscores" class="tsd-kind-icon">mean<wbr>Scores</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_score_.html#score" class="tsd-kind-icon">score</a></li>
 						</ul>
 					</section>
@@ -950,10 +954,10 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 				<a name="getseasontruthmem" class="tsd-anchor"></a>
 				<h3>get<wbr>Season<wbr>Truth<wbr>Mem</h3>
-				<div class="tsd-signature tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;memoize(truth.getSeasonTruth)</span></div>
+				<div class="tsd-signature tsd-kind-icon">get<wbr>Season<wbr>Truth<wbr>Mem<span class="tsd-signature-symbol">:</span> <a href="_truth_.html#getseasontruth" class="tsd-signature-type">getSeasonTruth</a><span class="tsd-signature-symbol"> =&nbsp;moize(truth.getSeasonTruth, { isPromise: true })</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/score.ts#L19">score.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/a2cf117/src/score.ts#L19">score.ts:19</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -967,16 +971,44 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-				<a name="score" class="tsd-anchor"></a>
-				<h3>score</h3>
+				<a name="meanscores" class="tsd-anchor"></a>
+				<h3>mean<wbr>Scores</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-					<li class="tsd-signature tsd-kind-icon">score<span class="tsd-signature-symbol">(</span>csv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Csv</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">mean<wbr>Scores<span class="tsd-signature-symbol">(</span>scores<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#regiontargetindex" class="tsd-signature-type">RegionTargetIndex</a><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#score" class="tsd-signature-type">Score</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#regiontargetindex" class="tsd-signature-type">RegionTargetIndex</a><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#score" class="tsd-signature-type">Score</a><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/25d38d0/src/score.ts#L24">score.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/a2cf117/src/score.ts#L24">score.ts:24</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Aggregate the scores by taking mean</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>scores: <a href="_interfaces_.html#regiontargetindex" class="tsd-signature-type">RegionTargetIndex</a><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#score" class="tsd-signature-type">Score</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#regiontargetindex" class="tsd-signature-type">RegionTargetIndex</a><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#score" class="tsd-signature-type">Score</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="score" class="tsd-anchor"></a>
+				<h3>score</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">score<span class="tsd-signature-symbol">(</span>csv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Csv</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#regiontargetindex" class="tsd-signature-type">RegionTargetIndex</a><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#score" class="tsd-signature-type">Score</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/a2cf117/src/score.ts#L50">score.ts:50</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -990,7 +1022,7 @@ img { max-width: 100%; }
 								<h5>csv: <span class="tsd-signature-type">Csv</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#regiontargetindex" class="tsd-signature-type">RegionTargetIndex</a><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_.html#score" class="tsd-signature-type">Score</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
