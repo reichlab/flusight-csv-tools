@@ -144,6 +144,87 @@ describe('findBin', () => {
   })
 })
 
+describe('expandBin', () => {
+  describe('percent bins', () => {
+    let bins: Bin[] = [
+      [0.0, 0.1, 1],
+      [0.1, 0.2, 2],
+      [0.2, 0.3, 3],
+      [0.3, 0.4, 4],
+      [0.4, 0.5, 5],
+      [0.5, 0.6, 6],
+      [0.6, 0.7, 7],
+      [0.7, 0.8, 8],
+      [0.8, 0.9, 9],
+      [0.9, 1.0, 10],
+      [1.0, 1.1, 11]
+    ]
+
+    it('should work for normal cases', () => {
+      let expanded = u.bins.expandBin(bins, 5, 'percent')
+      expect(expanded.length).to.equal(bins.length)
+      expect(bins.every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
+    })
+
+    it('should work for edge cases', () => {
+      let expanded = u.bins.expandBin(bins, 1, 'percent')
+      expect(expanded.length).to.equal(7)
+      expect(bins.slice(0, -4).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
+
+      expanded = u.bins.expandBin(bins, 6, 'percent')
+      expect(expanded.length).to.equal(10)
+      expect(bins.slice(1).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
+    })
+  })
+
+  describe('week bins', () => {
+    it('should work for normal cases', () => {
+      let bins: Bin[] = [
+        [201449, 201450, 1],
+        [201450, 201451, 2],
+        [201451, 201452, 3],
+        [201452, 201453, 4]
+      ]
+
+      let expanded = u.bins.expandBin(bins, 1, 'week')
+      expect(expanded.length).to.equal(3)
+      expect(bins.slice(0, -1).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
+    })
+
+    it('should work for edge cases', () => {
+      let bins: Bin[] = [
+        [201449, 201450, 1],
+        [201450, 201451, 2],
+        [201451, 201452, 3],
+        [201452, 201453, 4]
+      ]
+
+      let expanded = u.bins.expandBin(bins, 0, 'week')
+      expect(expanded.length).to.equal(2)
+      expect(bins.slice(0, -2).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
+
+      expanded = u.bins.expandBin(bins, 3, 'week')
+      expect(expanded.length).to.equal(2)
+      expect(bins.slice(2).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
+    })
+
+    it('should work for onsets', () => {
+      // Onset bin at standard position
+      let bins: Bin[] = [
+        [201449, 201450, 1],
+        [201450, 201451, 2],
+        [201451, 201452, 3],
+        [201452, 201453, 4],
+        [null, null, 5]
+      ]
+
+      let expanded = u.bins.expandBin(bins, 4, 'week')
+      expect(expanded.length).to.equal(1)
+      expect(arrayEqual(bins[4], expanded[0])).to.be.true
+    })
+  })
+})
+
 describe('Week to epiweek', () => {
   it('should be correct for normal cases', () => {
     let seasonId = 2017

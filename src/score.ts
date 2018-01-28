@@ -45,28 +45,6 @@ export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetInd
 }
 
 /**
- * Return bins to consider as neighbours for the bin at given index
- * This follows the CDC FluSight guideline for considering the neighbouring bins
- */
-function expandBins(bins: Bin[], index: number, binType: string): Bin[] {
-  let neighbours
-  if (binType === 'week') {
-    if (bins[index][0] === null) {
-      // Handle the edge case of onset, we don't return anyone else
-      return [bins[index]]
-    } else {
-      neighbours = 1
-      return [bins[index]]
-    }
-  } else if (binType === 'percent') {
-    neighbours = 5
-    return [bins[index]]
-  } else {
-    throw new Error('Unknown bin type found while expanding')
-  }
-}
-
-/**
  * Return scores for all the regions and targets in the csv
  */
 export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
@@ -93,7 +71,7 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
         try {
           let trueBinIndex = u.bins.findBinIndex(bins, trueValue, target)
           trueProbability = bins[trueBinIndex][2]
-          expandedTrueProbability = expandBins(bins, trueBinIndex, targetType[target])
+          expandedTrueProbability = u.bins.expandBin(bins, trueBinIndex, targetType[target])
             .reduce((acc, b) => acc + b[2], 0)
         } catch (e) {
           // Error in finding true bin, leaving probability as null
