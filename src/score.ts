@@ -45,22 +45,26 @@ export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetInd
 }
 
 /**
- * Return probability value for expanded bins starting at given index
+ * Return bins to consider as neighbours for the bin at given index
  * This follows the CDC FluSight guideline for considering the neighbouring bins
  */
-// function expandedBinProbability(bins: Bin[], index: number, binType: string): number {
-//   let neighbours
-//   if (binType === 'week') {
-//     if (bins[index][0] === null) {
-//       // Handle the edge case of onset, we don't return
-//     }
-//     neighbours = 1
-//   } else if (binType === 'percent') {
-//     neighbours = 5
-//   } else {
-//     throw new Error('Unknown bin type found while expanding')
-//   }
-// }
+function expandBins(bins: Bin[], index: number, binType: string): Bin[] {
+  let neighbours
+  if (binType === 'week') {
+    if (bins[index][0] === null) {
+      // Handle the edge case of onset, we don't return anyone else
+      return [bins[index]]
+    } else {
+      neighbours = 1
+      return [bins[index]]
+    }
+  } else if (binType === 'percent') {
+    neighbours = 5
+    return [bins[index]]
+  } else {
+    throw new Error('Unknown bin type found while expanding')
+  }
+}
 
 /**
  * Return scores for all the regions and targets in the csv
@@ -82,16 +86,23 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
         scores[region][target] = { logScore: null, logScoreMultiBin: null, error: null, absError: null }
       } else {
         let pointEstimate = csv.getPoint(target, region)
+        let bins = csv.getBins(target, region)
         let error
-
-        let trueProbability = null
+        let trueProbability
+        let expandedTrueProbability
         try {
-          trueProbability = u.bins.findBin(csv.getBins(target, region), trueValue, target)[2]
+          let trueBinIndex = u.bins.findBinIndex(bins, trueValue, target)
+          trueProbability = bins[trueBinIndex][2]
+          expandedTrueProbability = expandBins(bins, trueBinIndex, targetType[target])
+            .reduce((acc, b) => acc + b[2], 0)
         } catch (e) {
           // Error in finding true bin, leaving probability as null
+          trueProbability = null
+          expandedTrueProbability = null
         }
+
         let logScore = trueProbability !== null ? Math.log(trueProbability) : null
-        let logScoreMultiBin = logScore
+        let logScoreMultiBin = expandedTrueProbability !== null ? Math.log(expandedTrueProbability) : null
 
         if (targetType[target] === 'percent') {
           error = pointEstimate !== null ? trueValue - pointEstimate : null
