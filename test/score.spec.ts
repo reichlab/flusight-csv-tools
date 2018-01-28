@@ -62,13 +62,13 @@ describe('Scores', () => {
         },
         'peak-wk': {
           logScore: -1.4086095021368603,
-          logScoreMultiBin: -1.4086095021368603,
+          logScoreMultiBin: -0.6732778888192225,
           error: 2,
           absError: 2
         },
         'onset-wk': {
           logScore: -Infinity,
-          logScoreMultiBin: -Infinity,
+          logScoreMultiBin: 0,
           error: 1,
           absError: 1
         }
@@ -86,43 +86,43 @@ describe('Scores', () => {
       nat: {
         '1-ahead': {
           logScore: -1.4940521728850975,
-          logScoreMultiBin: -1.4940521728850975,
+          logScoreMultiBin: -0.03486223419697661,
           error: -0.11971539428982769,
           absError: 0.11971539428982769
         },
         '2-ahead': {
           logScore: -1.4252846580598586,
-          logScoreMultiBin: -1.4252846580598586,
+          logScoreMultiBin: -0.039093176422556504,
           error: -0.09328083484576499,
           absError: 0.09328083484576499
         },
         '3-ahead': {
           logScore: -1.712127901971514,
-          logScoreMultiBin: -1.712127901971514,
+          logScoreMultiBin: -0.042362529487734966,
           error: -0.0827351841778543,
           absError: 0.0827351841778543
         },
         '4-ahead': {
           logScore: -1.9755750256876092,
-          logScoreMultiBin: -1.9755750256876092,
+          logScoreMultiBin: -0.04182105327172841,
           error: -0.2033435882352843,
           absError: 0.2033435882352843
         },
         'peak': {
           logScore: -0.7031219962300552,
-          logScoreMultiBin: -0.7031219962300552,
+          logScoreMultiBin: -0.05923142898829419,
           error: -0.039060000002438144,
           absError: 0.039060000002438144
         },
         'peak-wk': {
           logScore: -0.8368084555740485,
-          logScoreMultiBin: -0.8368084555740485,
+          logScoreMultiBin: -0.04581716285212811,
           error: 1,
           absError: 1
         },
         'onset-wk': {
           logScore: -0.8979822612093167,
-          logScoreMultiBin: -0.8979822612093167,
+          logScoreMultiBin: -0.06653087121046036,
           error: 0,
           absError: 0
         }
@@ -172,13 +172,13 @@ describe('Scores', () => {
         },
         'peak-wk': {
           logScore: -1.1227089788554543,
-          logScoreMultiBin: -1.1227089788554543,
+          logScoreMultiBin: -0.3595475258356753,
           error: null,
           absError: 1.5
         },
         'onset-wk': {
           logScore: -Infinity,
-          logScoreMultiBin: -Infinity,
+          logScoreMultiBin: -0.03326543560523018,
           error: null,
           absError: 0.5
         }
