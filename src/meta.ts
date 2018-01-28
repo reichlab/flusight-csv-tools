@@ -55,6 +55,7 @@ export const targetIds: TargetId[] = [
  */
 export const scoreIds: string[] = [
   'logScore',
+  'logScoreMultiBin',
   'error',
   'absError'
 ]

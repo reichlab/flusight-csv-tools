@@ -65,10 +65,10 @@ export function sortBins(bins: Bin[], target: TargetId): Bin[] {
 }
 
 /**
- * Return bin in which the given value lies. Assume bins are properly sorted.
+ * Return bin index in which the given value lies. Assume bins are properly sorted.
  * `value` can be null, in which case we look for the last bin (which is onset bin).
  */
-export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
+export function findBinIndex(bins: Bin[], value: number, target: TargetId): number {
   let tolerance = 0.000000001
   let binType = targetType[target]
   let notFoundError = new Error('Bin value not found')
@@ -77,7 +77,7 @@ export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
     // We are looking for none bin of onset
     if (value === null) {
       if (bins[bins.length - 1][0] === null) {
-        return bins[bins.length - 1]
+        return bins.length - 1
       } else {
         throw notFoundError
       }
@@ -87,10 +87,10 @@ export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
     value = Math.floor(value)
 
     // For week case, we just need to search the bin starts
-    let bin = bins.find(b => almostEqual(b[0], value, tolerance))
+    let binIdx = bins.findIndex(b => almostEqual(b[0], value, tolerance))
 
-    if (bin) {
-      return bin
+    if (binIdx > -1) {
+      return binIdx
     } else {
       throw notFoundError
     }
@@ -105,14 +105,14 @@ export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
       throw notFoundError
     }
 
-    for (let bin of bins) {
-      if (almostEqual(bin[1], value, tolerance)) {
+    for (let i = 0; i < bins.length; i++) {
+      if (almostEqual(bins[i][1], value, tolerance)) {
         // Its the next bin
         continue
       } else {
-        if (((bin[1] - (value - tolerance)) > 0)
-            || (almostEqual(bin[1], (value - tolerance), tolerance))) {
-          return bin
+        if (((bins[i][1] - (value - tolerance)) > 0)
+            || (almostEqual(bins[i][1], (value - tolerance), tolerance))) {
+          return i
         }
       }
     }
@@ -120,4 +120,12 @@ export function binFor(bins: Bin[], value: number, target: TargetId): Bin {
 
   // In unexpected situation
   throw notFoundError
+}
+
+/**
+ * Return bin in which the given value lies. Assume bins are properly sorted.
+ * `value` can be null, in which case we look for the last bin (which is onset bin).
+ */
+export function findBin(bins: Bin[], value: number, target: TargetId): Bin {
+  return bins[findBinIndex(bins, value, target)]
 }
