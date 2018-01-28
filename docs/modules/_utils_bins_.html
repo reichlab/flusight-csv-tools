@@ -910,7 +910,13 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module">
-			<a href="_utils_bins_.html#binfor" class="tsd-kind-icon">bin<wbr>For</a>
+			<a href="_utils_bins_.html#expandbin" class="tsd-kind-icon">expand<wbr>Bin</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_bins_.html#findbin" class="tsd-kind-icon">find<wbr>Bin</a>
+		</li>
+		<li class=" tsd-kind-function tsd-parent-kind-external-module">
+			<a href="_utils_bins_.html#findbinindex" class="tsd-kind-icon">find<wbr>Bin<wbr>Index</a>
 		</li>
 		<li class=" tsd-kind-function tsd-parent-kind-external-module">
 			<a href="_utils_bins_.html#inferpoint" class="tsd-kind-icon">infer<wbr>Point</a>
@@ -942,7 +948,9 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#binfor" class="tsd-kind-icon">bin<wbr>For</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#expandbin" class="tsd-kind-icon">expand<wbr>Bin</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#findbin" class="tsd-kind-icon">find<wbr>Bin</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#findbinindex" class="tsd-kind-icon">find<wbr>Bin<wbr>Index</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#inferpoint" class="tsd-kind-icon">infer<wbr>Point</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#isuniform" class="tsd-kind-icon">is<wbr>Uniform</a></li>
 							<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utils_bins_.html#slicesumbins" class="tsd-kind-icon">slice<wbr>Sum<wbr>Bins</a></li>
@@ -955,16 +963,51 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-				<a name="binfor" class="tsd-anchor"></a>
-				<h3>bin<wbr>For</h3>
+				<a name="expandbin" class="tsd-anchor"></a>
+				<h3>expand<wbr>Bin</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-					<li class="tsd-signature tsd-kind-icon">bin<wbr>For<span class="tsd-signature-symbol">(</span>bins<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, target<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#targetid" class="tsd-signature-type">TargetId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a></li>
+					<li class="tsd-signature tsd-kind-icon">expand<wbr>Bin<span class="tsd-signature-symbol">(</span>bins<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, target<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#targetid" class="tsd-signature-type">TargetId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/2aab401/src/utils/bins.ts#L71">utils/bins.ts:71</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L137">utils/bins.ts:137</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return bins to consider as neighbours for the bin at given index
+								This follows the CDC FluSight guideline for considering the neighbouring bins</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>bins: <a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li>
+								<h5>index: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>target: <a href="_interfaces_.html#targetid" class="tsd-signature-type">TargetId</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="findbin" class="tsd-anchor"></a>
+				<h3>find<wbr>Bin</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Bin<span class="tsd-signature-symbol">(</span>bins<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, target<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#targetid" class="tsd-signature-type">TargetId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L129">utils/bins.ts:129</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -990,6 +1033,41 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<a name="findbinindex" class="tsd-anchor"></a>
+				<h3>find<wbr>Bin<wbr>Index</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Bin<wbr>Index<span class="tsd-signature-symbol">(</span>bins<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, target<span class="tsd-signature-symbol">: </span><a href="_interfaces_.html#targetid" class="tsd-signature-type">TargetId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L71">utils/bins.ts:71</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return bin index in which the given value lies. Assume bins are properly sorted.
+								<code>value</code> can be null, in which case we look for the last bin (which is onset bin).</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>bins: <a href="_interfaces_.html#bin" class="tsd-signature-type">Bin</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li>
+								<h5>value: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>target: <a href="_interfaces_.html#targetid" class="tsd-signature-type">TargetId</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 				<a name="inferpoint" class="tsd-anchor"></a>
 				<h3>infer<wbr>Point</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
@@ -999,7 +1077,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/2aab401/src/utils/bins.ts#L25">utils/bins.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L25">utils/bins.ts:25</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1027,7 +1105,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/2aab401/src/utils/bins.ts#L16">utils/bins.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L16">utils/bins.ts:16</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1055,7 +1133,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/2aab401/src/utils/bins.ts#L38">utils/bins.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L38">utils/bins.ts:38</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1086,7 +1164,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/2aab401/src/utils/bins.ts#L54">utils/bins.ts:54</a></li>
+								<li>Defined in <a href="https://github.com/reichlab/flusight-csv-tools/blob/e36f3b9/src/utils/bins.ts#L54">utils/bins.ts:54</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
