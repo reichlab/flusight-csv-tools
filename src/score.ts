@@ -71,7 +71,7 @@ export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
         try {
           let trueBinIndex = u.bins.findBinIndex(bins, trueValue, target)
           trueProbability = bins[trueBinIndex][2]
-          expandedTrueProbability = u.bins.expandBin(bins, trueBinIndex, targetType[target])
+          expandedTrueProbability = u.bins.expandBin(bins, trueBinIndex, target)
             .reduce((acc, b) => acc + b[2], 0)
         } catch (e) {
           // Error in finding true bin, leaving probability as null

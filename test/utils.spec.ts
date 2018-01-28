@@ -161,17 +161,17 @@ describe('expandBin', () => {
     ]
 
     it('should work for normal cases', () => {
-      let expanded = u.bins.expandBin(bins, 5, 'percent')
+      let expanded = u.bins.expandBin(bins, 5, '1-ahead')
       expect(expanded.length).to.equal(bins.length)
       expect(bins.every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
     })
 
     it('should work for edge cases', () => {
-      let expanded = u.bins.expandBin(bins, 1, 'percent')
+      let expanded = u.bins.expandBin(bins, 1, '1-ahead')
       expect(expanded.length).to.equal(7)
       expect(bins.slice(0, -4).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
 
-      expanded = u.bins.expandBin(bins, 6, 'percent')
+      expanded = u.bins.expandBin(bins, 6, '1-ahead')
       expect(expanded.length).to.equal(10)
       expect(bins.slice(1).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
     })
@@ -186,7 +186,7 @@ describe('expandBin', () => {
         [201452, 201453, 4]
       ]
 
-      let expanded = u.bins.expandBin(bins, 1, 'week')
+      let expanded = u.bins.expandBin(bins, 1, 'peak-wk')
       expect(expanded.length).to.equal(3)
       expect(bins.slice(0, -1).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
     })
@@ -199,11 +199,11 @@ describe('expandBin', () => {
         [201452, 201453, 4]
       ]
 
-      let expanded = u.bins.expandBin(bins, 0, 'week')
+      let expanded = u.bins.expandBin(bins, 0, 'peak-wk')
       expect(expanded.length).to.equal(2)
       expect(bins.slice(0, -2).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
 
-      expanded = u.bins.expandBin(bins, 3, 'week')
+      expanded = u.bins.expandBin(bins, 3, 'peak-wk')
       expect(expanded.length).to.equal(2)
       expect(bins.slice(2).every((b, idx) => arrayEqual(b, expanded[idx]))).to.be.true
     })
@@ -218,7 +218,7 @@ describe('expandBin', () => {
         [null, null, 5]
       ]
 
-      let expanded = u.bins.expandBin(bins, 4, 'week')
+      let expanded = u.bins.expandBin(bins, 4, 'onset-wk')
       expect(expanded.length).to.equal(1)
       expect(arrayEqual(bins[4], expanded[0])).to.be.true
     })

@@ -134,11 +134,12 @@ export function findBin(bins: Bin[], value: number, target: TargetId): Bin {
  * Return bins to consider as neighbours for the bin at given index
  * This follows the CDC FluSight guideline for considering the neighbouring bins
  */
-export function expandBin(bins: Bin[], index: number, binType: string): Bin[] {
+export function expandBin(bins: Bin[], index: number, target: TargetId): Bin[] {
   function getBinsInWindow(windowSize) {
       return bins.filter((_, idx) => (idx >= (index - windowSize)) && (idx <= (index + windowSize)))
   }
 
+  let binType = targetType[target]
   if (binType === 'week') {
     if (bins[index][0] === null) {
       // We don't return anyone else in case of onset
