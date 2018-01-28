@@ -135,15 +135,24 @@ export function findBin(bins: Bin[], value: number, target: TargetId): Bin {
  * This follows the CDC FluSight guideline for considering the neighbouring bins
  */
 export function expandBin(bins: Bin[], index: number, binType: string): Bin[] {
+  function getBinsInWindow(windowSize) {
+      return bins.filter((_, idx) => (idx >= (index - windowSize)) && (idx <= (index + windowSize)))
+  }
+
   if (binType === 'week') {
     if (bins[index][0] === null) {
       // We don't return anyone else in case of onset
       return [bins[index]]
     } else {
-      return bins.filter((_, idx) => (idx >= (index - 1)) && (idx <= (index + 1)))
+      return getBinsInWindow(1)
     }
   } else if (binType === 'percent') {
-    return bins.filter((_, idx) => (idx >= (index - 5)) && (idx <= (index + 5)))
+    if (bins.length === 27) {
+      // These are old style bins, only use a neighbour size of 1
+      return getBinsInWindow(1)
+    } else {
+      return getBinsInWindow(5)
+    }
   } else {
     throw new Error('Unknown bin type found while expanding')
   }
