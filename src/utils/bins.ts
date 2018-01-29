@@ -42,7 +42,7 @@ export function sliceSumBins(bins: Bin[], batch: number): Bin[] {
       acc[sIdx][2] += bin[2]
       acc[sIdx][1] = bin[1]
     } else {
-      acc.push(bin)
+      acc.push(bin.slice() as Bin)
     }
     return acc
   }, [])
