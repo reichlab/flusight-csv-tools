@@ -29,7 +29,7 @@ function getSeasonRequestUrl(season: SeasonId, lag?: number): string {
     }
   })
 
-  return lag ? `${url}&lag=${lag}` : url
+  return lag !== undefined ? `${url}&lag=${lag}` : url
 }
 
 /**
