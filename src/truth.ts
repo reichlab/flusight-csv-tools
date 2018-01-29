@@ -61,7 +61,8 @@ export async function getBaseline(region: RegionId, season: SeasonId): Promise<n
  * object keyed by region ids having a list of { epiweek, wili } items as values
  */
 export async function getSeasonData(season: SeasonId, lag?: number): Promise<{ [R in RegionId] : EpiweekWili[] }> {
-  let cacheFile = `seasondata-${season}-lag-${lag || 'latest'}-${u.epiweek.currentEpiweek()}.json`
+  let lagId = lag === undefined ? 'latest' : lag
+  let cacheFile = `seasondata-${season}-lag-${lagId}-${u.epiweek.currentEpiweek()}.json`
 
   if (await u.cache.isInCache(cacheFile)) {
     return await u.cache.readFromCache(cacheFile)
@@ -78,7 +79,7 @@ export async function getSeasonData(season: SeasonId, lag?: number): Promise<{ [
       await u.cache.writeInCache(cacheFile, JSON.stringify(formattedData))
       return formattedData
     } else {
-      console.log(`Warning: Delphi api says "${data.message}" for ${season}, lag ${lag || 'latest'}.`)
+      console.log(`Warning: Delphi api says "${data.message}" for ${season}, lag ${lagId}.`)
       return null
     }
   }
