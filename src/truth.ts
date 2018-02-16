@@ -175,8 +175,8 @@ function parseWeekAhead(ewPairs: EpiweekWili[], startAt: Epiweek, nAhead: number
  * Find true target values for given season. Return a promise of an object keyed by region
  * id having a list of { target: truth } items
  */
-export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string]: { [index: string]: number }[] }> {
-  let seasonData = await getSeasonData(season)
+export async function getSeasonTruth(season: SeasonId, lag?: number): Promise<{ [index: string]: { [index: string]: number }[] }> {
+  let seasonData = await getSeasonData(season, lag)
 
   // If we need truth for a past season, we also need to collect data for the
   // one season ahead to account for the week head values for the last few weeks
@@ -184,7 +184,7 @@ export async function getSeasonTruth(season: SeasonId): Promise<{ [index: string
   // season data and jam it to the current season
   let nextSeasonData
   if (seasonData && (season < u.epiweek.currentSeasonId())) {
-    nextSeasonData = await getSeasonData(season + 1)
+    nextSeasonData = await getSeasonData(season + 1, lag)
   }
 
   let allEpiweeks = u.epiweek.seasonEpiweeks(season)
