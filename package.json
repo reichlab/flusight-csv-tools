@@ -1,6 +1,6 @@
 {
   "name": "flusight-csv-tools",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Node toolkit for CDC FluSight format csvs.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
