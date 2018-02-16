@@ -47,8 +47,8 @@ export function meanScores (scores: RegionTargetIndex<Score>[]): RegionTargetInd
 /**
  * Return scores for all the regions and targets in the csv
  */
-export async function score(csv: Csv): Promise<RegionTargetIndex<Score>> {
-  let seasonTruth = await getSeasonTruthMem(csv.season)
+export async function score(csv: Csv, lag?: number): Promise<RegionTargetIndex<Score>> {
+  let seasonTruth = await getSeasonTruthMem(csv.season, lag)
 
   let scores: RegionTargetIndex<Score> = {}
 
