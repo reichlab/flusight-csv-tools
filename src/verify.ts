@@ -43,6 +43,11 @@ export function verifyProbabilities(csv: Csv) {
   targetIds.forEach(target => {
     regionIds.forEach(region => {
       let probabilities = csv.getBins(target, region).map(b => b[2])
+
+      probabilities.forEach(p => {
+        assert((p >= 0) && (p <= 1), `Probabilities should be in [0.0, 1.0]`)
+      })
+
       assert(
         almostEqual(probabilities.reduce((x, y) => x + y), 1.0, almostEqual.FLT_EPSILON),
         `Probabilities for target ${target}, region ${region} should sum to 1.0`
