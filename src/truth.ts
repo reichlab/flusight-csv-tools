@@ -138,7 +138,6 @@ function parsePeak(ewPairs: EpiweekWili[], allEpiweeks: Epiweek[]): { [index: st
 
 /**
  * Return onset week
- * TODO: Verify that this is correct
  */
 function parseOnset(ewPairs: EpiweekWili[], baseline: number): number {
   let onset = null
