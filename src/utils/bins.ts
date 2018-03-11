@@ -10,8 +10,10 @@ import { Epiweek, Bin, TargetId } from '../interfaces'
 import { targetType } from '../meta'
 import { isInCache } from './cache';
 
+const TOLERANCE = 0.000000001
+
 /**
- * Tell whether the bins represent
+ * Tell whether the bins represent a uniform distribution
  */
 export function isUniform(bins: Bin[]): boolean {
   // Skip the last bin which is sometimes different since that bin contains, e.g.
@@ -69,7 +71,6 @@ export function sortBins(bins: Bin[], target: TargetId): Bin[] {
  * `value` can be null, in which case we look for the last bin (which is onset bin).
  */
 export function findBinIndex(bins: Bin[], value: number, target: TargetId): number {
-  let tolerance = 0.000000001
   let binType = targetType[target]
   let notFoundError = new Error('Bin value not found')
 
@@ -87,7 +88,7 @@ export function findBinIndex(bins: Bin[], value: number, target: TargetId): numb
     value = Math.floor(value)
 
     // For week case, we just need to search the bin starts
-    let binIdx = bins.findIndex(b => almostEqual(b[0], value, tolerance))
+    let binIdx = bins.findIndex(b => almostEqual(b[0], value, TOLERANCE))
 
     if (binIdx > -1) {
       return binIdx
@@ -100,18 +101,18 @@ export function findBinIndex(bins: Bin[], value: number, target: TargetId): numb
     let binMin = bins[0][0]
     let binMax = (bins[bins.length - 1][0] === null) ? bins[bins.length - 2][1] : bins[bins.length - 1][1]
 
-    if (((value - (binMin - tolerance)) < 0)
-        || ((value - (binMax + tolerance)) > 0)) {
+    if (((value - (binMin - TOLERANCE)) < 0)
+        || ((value - (binMax + TOLERANCE)) > 0)) {
       throw notFoundError
     }
 
     for (let i = 0; i < bins.length; i++) {
-      if (almostEqual(bins[i][1], value, tolerance)) {
+      if (almostEqual(bins[i][1], value, TOLERANCE)) {
         // Its the next bin
         continue
       } else {
-        if (((bins[i][1] - (value - tolerance)) > 0)
-            || (almostEqual(bins[i][1], (value - tolerance), tolerance))) {
+        if (((bins[i][1] - (value - TOLERANCE)) > 0)
+            || (almostEqual(bins[i][1], (value - TOLERANCE), TOLERANCE))) {
           return i
         }
       }
@@ -157,4 +158,11 @@ export function expandBin(bins: Bin[], index: number, target: TargetId): Bin[] {
   } else {
     throw new Error('Unknown bin type found while expanding')
   }
+}
+
+/**
+ * Check whether the two bins are equal
+ */
+export function binsEq(bin1: Bin, bin2: Bin): boolean {
+  return bin1.every((b1, i) => almostEqual(b1, bin2[i], TOLERANCE))
 }

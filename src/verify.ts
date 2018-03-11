@@ -37,6 +37,31 @@ export function verifyHeaders(csv: Csv) {
 }
 
 /**
+ * Verify that the two csvs are equivalent
+ */
+export function verifyEquivalence(csv1: Csv, csv2: Csv) {
+  // Basic checks
+  assert(csv1.model === csv2.model, 'Both csvs should be from the same model')
+  assert(csv1.epiweek === csv2.epiweek, 'Both csvs should be for the same epiweek')
+
+  for (let region of regionIds) {
+    for (let target of targetIds) {
+      assert(
+        csv1.getPoint(target, region) === csv2.getPoint(target, region),
+        `Point prediction for ${region}, ${target} should match`
+      )
+
+      let bins1 = csv1.getBins(target, region)
+      let bins2 = csv2.getBins(target, region)
+      assert(
+        bins1.every((bin1, i) => u.bins.binsEq(bin1, bins2[i])),
+        `Bins for ${region}, ${target} should be equal`
+      )
+    }
+  }
+}
+
+/**
  * Verify that the probabilities in csv sum to one
  */
 export function verifyProbabilities(csv: Csv) {
