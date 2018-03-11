@@ -4,7 +4,7 @@ import 'mocha'
 
 describe('Sample CSV file', () => {
   let filePath = './test/data/sample.csv'
-  let epiweek = 201720
+  let epiweek = 201620
   let model = 'sample'
 
   let sub = new Csv(filePath, epiweek, model)

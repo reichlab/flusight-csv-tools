@@ -26,51 +26,51 @@ function scoresEqual(scoreA: { [index: string]: Score },
 
 describe('Scores', () => {
   it('should be correct for sample.csv', async () => {
-    let csv = new Csv('./test/data/sample.csv', 201720, 'sample')
+    let csv = new Csv('./test/data/sample.csv', 201620, 'sample')
 
     let expectedScore = {
       nat: {
         '1-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
-          error: -5.03411,
-          absError: 5.03411
+          error: -5.01621,
+          absError: 5.01621
         },
         '2-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
-          error: -5.69074,
-          absError: 5.69074
+          error: -5.66277,
+          absError: 5.66277
         },
         '3-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
-          error: -6.156090000000001,
-          absError: 6.156090000000001
+          error: -6.15882,
+          absError: 6.15882
         },
         '4-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
-          error: -6.294873,
-          absError: 6.294873
+          error: -6.228186,
+          absError: 6.228186
         },
         'peak': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
-          error: -2.1390599999999997,
-          absError: 2.1390599999999997
+          error: -3.6397600000000003,
+          absError: 3.6397600000000003
         },
         'peak-wk': {
-          logScore: -1.4086095021368603,
-          logScoreMultiBin: -0.6732778888192225,
-          error: 2,
-          absError: 2
+          logScore: -Infinity,
+          logScoreMultiBin: -Infinity,
+          error: 6,
+          absError: 6
         },
         'onset-wk': {
           logScore: -Infinity,
-          logScoreMultiBin: 0,
-          error: 1,
-          absError: 1
+          logScoreMultiBin: -Infinity,
+          error: 6,
+          absError: 6
         }
       }
     }
@@ -80,51 +80,51 @@ describe('Scores', () => {
   }).timeout(0)
 
   it('should be correct for sample2.csv', async () => {
-    let csv = new Csv('./test/data/sample2.csv', 201720, 'sample2')
+    let csv = new Csv('./test/data/sample2.csv', 201620, 'sample2')
 
     let expectedScore = {
       nat: {
         '1-ahead': {
           logScore: -1.4940521728850975,
           logScoreMultiBin: -0.03486223419697661,
-          error: -0.11971539428982769,
-          absError: 0.11971539428982769
+          error: -0.10181539428982789,
+          absError: 0.10181539428982789
         },
         '2-ahead': {
           logScore: -1.4252846580598586,
           logScoreMultiBin: -0.039093176422556504,
-          error: -0.09328083484576499,
-          absError: 0.09328083484576499
+          error: -0.06531083484576494,
+          absError: 0.06531083484576494
         },
         '3-ahead': {
           logScore: -1.712127901971514,
           logScoreMultiBin: -0.042362529487734966,
-          error: -0.0827351841778543,
-          absError: 0.0827351841778543
+          error: -0.0854651841778542,
+          absError: 0.0854651841778542
         },
         '4-ahead': {
           logScore: -1.9755750256876092,
           logScoreMultiBin: -0.04182105327172841,
-          error: -0.2033435882352843,
-          absError: 0.2033435882352843
+          error: -0.13665658823528437,
+          absError: 0.13665658823528437
         },
         'peak': {
-          logScore: -0.7031219962300552,
-          logScoreMultiBin: -0.05923142898829419,
-          error: -0.039060000002438144,
-          absError: 0.039060000002438144
+          logScore: -7.748899330101157,
+          logScoreMultiBin: -5.29130312929772,
+          error: -1.5397600000024387,
+          absError: 1.5397600000024387
         },
         'peak-wk': {
-          logScore: -0.8368084555740485,
-          logScoreMultiBin: -0.04581716285212811,
-          error: 1,
-          absError: 1
+          logScore: -6.503339739507561,
+          logScoreMultiBin: -5.404815819136896,
+          error: 5,
+          absError: 5
         },
         'onset-wk': {
-          logScore: -0.8979822612093167,
-          logScoreMultiBin: -0.06653087121046036,
-          error: 0,
-          absError: 0
+          logScore: -6.377599525432952,
+          logScoreMultiBin: -5.249647918775156,
+          error: 5,
+          absError: 5
         }
       }
     }
@@ -135,8 +135,8 @@ describe('Scores', () => {
 
 
   it('should be aggregated correctly', async () => {
-    let csv = new Csv('./test/data/sample.csv', 201720, 'sample')
-    let csv2 = new Csv('./test/data/sample2.csv', 201720, 'sample2')
+    let csv = new Csv('./test/data/sample.csv', 201620, 'sample')
+    let csv2 = new Csv('./test/data/sample2.csv', 201620, 'sample2')
 
     let expectedScore = {
       nat: {
@@ -144,43 +144,43 @@ describe('Scores', () => {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
           error: null,
-          absError: 2.576912697144914
+          absError: 2.559012697144914
         },
         '2-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
           error: null,
-          absError: 2.8920104174228825
+          absError: 2.8640404174228826
         },
         '3-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
           error: null,
-          absError: 3.1194125920889277
+          absError: 3.1221425920889274
         },
         '4-ahead': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
           error: null,
-          absError: 3.249108294117642
+          absError: 3.182421294117642
         },
         'peak': {
           logScore: -Infinity,
           logScoreMultiBin: -Infinity,
           error: null,
-          absError: 1.089060000001219
+          absError: 2.5897600000012195
         },
         'peak-wk': {
-          logScore: -1.1227089788554543,
-          logScoreMultiBin: -0.3595475258356753,
+          logScore: -Infinity,
+          logScoreMultiBin: -Infinity,
           error: null,
-          absError: 1.5
+          absError: 5.5
         },
         'onset-wk': {
           logScore: -Infinity,
-          logScoreMultiBin: -0.03326543560523018,
+          logScoreMultiBin: -Infinity,
           error: null,
-          absError: 0.5
+          absError: 5.5
         }
       }
     }
