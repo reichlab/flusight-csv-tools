@@ -61,7 +61,13 @@ export async function score(csv: Csv, lag?: number): Promise<RegionTargetIndex<S
 
       if ((target !== 'onset-wk') && (trueValue === null)) {
         // Only onset-wk can have null true value
-        scores[region][target] = { logScore: null, logScoreMultiBin: null, error: null, absError: null }
+        scores[region][target] = {
+          logScore: null,
+          logScoreMultiBin: null,
+          error: null,
+          absError: null,
+          probabilityScore: null
+        }
       } else {
         let pointEstimate = csv.getPoint(target, region)
         let bins = csv.getBins(target, region)

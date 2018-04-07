@@ -61,7 +61,8 @@ export type Score = {
   logScore: number,
   logScoreMultiBin: number,
   error: number,
-  absError: number
+  absError: number,
+  probabilityScore: number
 }
 
 /**
