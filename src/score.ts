@@ -101,7 +101,13 @@ export async function score(csv: Csv, lag?: number): Promise<RegionTargetIndex<S
           }
         }
 
-        scores[region][target] = { logScore, logScoreMultiBin, error, absError: Math.abs(error) }
+        scores[region][target] = {
+          logScore,
+          logScoreMultiBin,
+          error,
+          absError: Math.abs(error),
+          probabilityScore: trueProbability
+        }
       }
     }
   }

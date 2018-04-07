@@ -57,7 +57,8 @@ export const scoreIds: string[] = [
   'logScore',
   'logScoreMultiBin',
   'error',
-  'absError'
+  'absError',
+  'probabilityScore'
 ]
 
 /**
